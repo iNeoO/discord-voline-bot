@@ -4,6 +4,7 @@
   "description": "A staine bot for discord",
   "main": "index.js",
   "scripts": {
+    "start": "node .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Valère Pique <pique.valere@gmx.fr>",
