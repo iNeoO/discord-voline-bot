@@ -1,0 +1,16 @@
+{
+  "name": "staline-bot",
+  "version": "1.0.0",
+  "description": "A staine bot for discord",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Valère Pique <pique.valere@gmx.fr>",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "eslint": "^5.0.1",
+    "request": "^2.87.0"
+  }
+}
