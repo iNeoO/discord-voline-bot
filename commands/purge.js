@@ -1,3 +1,4 @@
+const Discord = require('discord.js');
 const { adminIdRole } = require('../config.json');
 
 module.exports = {
@@ -10,8 +11,11 @@ module.exports = {
     const author = message.member;
     const member = message.mentions.members.first();
     if(author.roles.has(adminIdRole)) {
-      member.kick();
-      return message.reply(`<@${member.id}> has been purged !`);
+      setTimeout(() => {
+        member.kick();
+        return message.reply(`<@${member.id}> has been purged !`);
+      }, 5000);
+      message.channel.send(`<@${member.id}>`, new Discord.Attachment('./purge.jpg', 'purge.jpg'));
     } else {
       return message.reply('you are not allowed to purge anybody');
     }
