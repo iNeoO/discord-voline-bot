@@ -1,4 +1,4 @@
-const { helpMessage } = require('../helpers/helper.js');
+const { helpMessage } = require('../helpers/msg.js');
 
 module.exports = {
   name: 'help',
