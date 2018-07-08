@@ -16,7 +16,7 @@ module.exports = {
       memeNb = Math.floor((Math.random() * memeCdnNb) + 1);
     }
     download(`${memeCdnUrl}${memeNb}`, 'goulag.jpg', () => {
-      return message.channel.send(`img ${memeNb}`, new Discord.Attachment('./goulag.jpg', 'goulag.jpg'));
+      return message.channel.send(`img ${memeNb}`, new Discord.Attachment('./static/img/goulag.jpg', 'goulag.jpg'));
     });
   },
 };

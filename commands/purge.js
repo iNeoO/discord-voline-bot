@@ -15,7 +15,7 @@ module.exports = {
         member.kick();
         return message.reply(`<@${member.id}> has been purged !`);
       }, 5000);
-      message.channel.send(`<@${member.id}>`, new Discord.Attachment('./purge.png', 'purge.png'));
+      message.channel.send(`<@${member.id}>`, new Discord.Attachment('./static/img/purge.png', 'purge.png'));
     } else {
       return message.reply('you are not allowed to purge anybody');
     }
