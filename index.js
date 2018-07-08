@@ -13,6 +13,7 @@ for (const file of commandFiles) {
 }
 
 client.on('ready', () => {
+  client.user.setActivity('Sending people to gulag');
   console.log('Ready!');
 });
 

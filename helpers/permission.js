@@ -8,7 +8,7 @@ module.exports = {
     const author = message.member;
     const member = message.mentions.members.first();
     if(author.roles.has(adminIdRole)) {
-      callback(author, member);
+      callback(member, author);
     } else {
       return message.reply(notAllowedMsg);
     }

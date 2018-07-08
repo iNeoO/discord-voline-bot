@@ -13,7 +13,9 @@ module.exports = {
         member.removeRole(roles[i]).catch(console.error);
       }
       const exileRole = message.guild.roles.get(exileIdRole);
-      member.addRole(exileRole).catch(console.error);
+      setTimeout(() => {
+        member.addRole(exileRole).catch(console.error);
+      }, 500);
       return message.reply(`<@${member.id}> has been exiled !`);
     });
   },
