@@ -1,6 +1,7 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const { id, prefix, token } = require('./config.json');
+const { quotes } = require('./helpers/msg.js');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -18,6 +19,10 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
+  if (message.content.startsWith(id) && !message.author.bot) {
+    const random = Math.floor((Math.random() * quotes.length) + 1);
+    message.reply(` ${quotes[random]}`);
+  }
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).split(/ +/);
