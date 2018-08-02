@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const { voteIdChannel } = require('../config.json');
 
 module.exports = {
   name: 'poll',
@@ -16,10 +17,13 @@ module.exports = {
       .setDescription(`${question}`)
       .setFooter(`Poll Started By: ${message.author.username}`, `${message.author.avatarURL}`);
 
-    message.channel.send({ embed });
-    message.react('👍')
-      .then(() => message.react('👎'))
-      .then(() => message.react('🤷'))
-      .catch(() => console.error('Emoji failed to react.'));
+
+    const channel = message.client.channels.find('id', voteIdChannel);
+    channel.send({ embed }).then((messageAnswered) => {
+      messageAnswered.react('👍')
+        .then(() => messageAnswered.react('👎'))
+        .then(() => messageAnswered.react('🤷'))
+        .catch(() => messageAnswered.error('Emoji failed to react.'));
+    });
   },
 };

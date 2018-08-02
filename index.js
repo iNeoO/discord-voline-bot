@@ -20,6 +20,7 @@ client.on('ready', () => {
 
 client.on('message', message => {
   if (message.content.startsWith(id) && !message.author.bot) {
+    console.log(message.content);
     const random = Math.floor((Math.random() * quotes.length));
     message.reply(` ${quotes[random]}`);
   }
