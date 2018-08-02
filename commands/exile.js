@@ -1,4 +1,4 @@
-const { exileIdRole } = require('../config.json');
+const { exileIdRole, adminIdRole } = require('../config.json');
 const { isAuthorized } = require('../helpers/permission.js');
 
 module.exports = {
@@ -7,9 +7,10 @@ module.exports = {
   execute(message) {
     const tagNeededMsg = 'you need to tag a user in order to exile them!';
     const notAllowedMsg = 'you are not allowed to exile anybody';
-    isAuthorized(message, tagNeededMsg, notAllowedMsg, (member) => {
-      const roles = member._roles;
-      for (let i = 0; i < roles.length; i += 1) {
+    const roles = [adminIdRole];
+    isAuthorized(message, tagNeededMsg, notAllowedMsg, roles, (member) => {
+      const memberRoles = member._roles;
+      for (let i = 0; i < memberRoles.length; i += 1) {
         member.removeRole(roles[i]).catch(console.error);
       }
       const exileRole = message.guild.roles.get(exileIdRole);

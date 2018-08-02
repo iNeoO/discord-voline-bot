@@ -16,10 +16,11 @@ module.exports = {
       .setDescription(`${question}`)
       .setFooter(`Poll Started By: ${message.author.username}`, `${message.author.avatarURL}`);
 
-    message.channel.send({ embed });
-    message.react('👍')
-      .then(() => message.react('👎'))
-      .then(() => message.react('🤷'))
-      .catch(() => console.error('Emoji failed to react.'));
+    message.channel.send({ embed }).then((messageAnswered) => {
+      messageAnswered.react('👍')
+        .then(() => messageAnswered.react('👎'))
+        .then(() => messageAnswered.react('🤷'))
+        .catch(() => messageAnswered.error('Emoji failed to react.'));
+    });
   },
 };

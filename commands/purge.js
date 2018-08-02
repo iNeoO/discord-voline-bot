@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const { adminIdRole } = require('../config.json');
 const { isAuthorized } = require('../helpers/permission.js');
 
 module.exports = {
@@ -7,7 +8,8 @@ module.exports = {
   execute(message) {
     const tagNeededMsg = 'you need to tag a user in order to purge them!';
     const notAllowedMsg = 'you are not allowed to purge anybody';
-    isAuthorized(message, tagNeededMsg, notAllowedMsg, (member) => {
+    const roles = [adminIdRole];
+    isAuthorized(message, tagNeededMsg, notAllowedMsg, roles, (member) => {
       setTimeout(() => {
         member.kick();
         return message.reply(`<@${member.id}> has been purged !`);

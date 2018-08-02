@@ -7,7 +7,8 @@ module.exports = {
   execute(message) {
     const tagNeededMsg = 'you need to tag a user in order to promote them!';
     const notAllowedMsg = 'you are not allowed to promote anybody';
-    isAuthorized(message, tagNeededMsg, notAllowedMsg, (member) => {
+    const roles = [adminIdRole];
+    isAuthorized(message, tagNeededMsg, notAllowedMsg, roles, (member) => {
       const exileRole = message.guild.roles.get(adminIdRole);
       member.addRole(exileRole).catch(console.error);
       return message.reply(`<@${member.id}> has been promoted !`);
