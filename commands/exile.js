@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { exileIdRole, moderatorIdRole, memberIdRole, annoncesIdChannel } = require('../config.json');
+const { exileIdRole, moderatorIdRole, memberIdRole, invitedIdRole, annoncesIdChannel } = require('../config.json');
 const { isAuthorized } = require('../helpers/permission.js');
 
 module.exports = {
@@ -11,9 +11,10 @@ module.exports = {
     const notAllowedMsg = 'you are not allowed to exile anybody';
     const roles = [moderatorIdRole, memberIdRole];
     isAuthorized(message, tagNeededMsg, notAllowedMsg, roles, (member) => {
-      const memberRoles = member._roles;
-      for (let i = 0; i < memberRoles.length; i += 1) {
-        member.removeRole(roles[i]).catch(console.error);
+      const rolesToRemove = [moderatorIdRole, memberIdRole, invitedIdRole];
+      for (let i = 0; i < rolesToRemove.length; i += 1) {
+        const roleToRemove = message.guild.roles.get(rolesToRemove[i]);
+        member.removeRole(roleToRemove).catch(console.error);
       }
       const exileRole = message.guild.roles.get(exileIdRole);
       setTimeout(() => {
