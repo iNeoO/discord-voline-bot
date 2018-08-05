@@ -5,7 +5,8 @@ const { isAuthorized } = require('../helpers/permission.js');
 module.exports = {
   name: 'purge',
   description: 'Tag a member and purge them.',
-  execute(message) {
+  execute(message, args) {
+    const reason = args.slice(1).join(' ');
     const tagNeededMsg = 'you need to tag a user in order to purge them!';
     const notAllowedMsg = 'you are not allowed to purge anybody';
     const roles = [moderatorIdRole, memberIdRole];
@@ -22,12 +23,12 @@ module.exports = {
         return message.reply('This user can\'t be purged');
       }
       setTimeout(() => {
-        // member.kick();
+        member.kick();
 
         const embed = new Discord.RichEmbed()
           .setTitle('Exile log')
           .setColor('#5599ff')
-          .setDescription(`${member.user.username} has been purged`)
+          .setDescription(`${member.user.username} has been purged ! \n${reason}`)
           .setFooter(`Purged by: ${message.author.username}`, `${message.author.avatarURL}`);
 
         const channel = message.client.channels.find('id', annoncesIdChannel);
