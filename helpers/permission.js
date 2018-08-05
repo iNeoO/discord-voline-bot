@@ -1,6 +1,6 @@
 module.exports = {
   isAuthorized: (message, tagNeededMsg, notAllowedMsg, roles, callback) => {
-    if (!message.mentions.users.size) {
+    if (tagNeededMsg && !message.mentions.users.size) {
       return message.reply(tagNeededMsg);
     }
     const author = message.member;

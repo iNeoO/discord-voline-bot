@@ -1,4 +1,5 @@
-const { exileIdRole, moderatorIdRole, memberIdRole } = require('../config.json');
+const Discord = require('discord.js');
+const { exileIdRole, moderatorIdRole, memberIdRole, annoncesIdChannel } = require('../config.json');
 const { isAuthorized } = require('../helpers/permission.js');
 
 module.exports = {
@@ -17,6 +18,16 @@ module.exports = {
       setTimeout(() => {
         member.addRole(exileRole).catch(console.error);
       }, 500);
+
+      const embed = new Discord.RichEmbed()
+        .setTitle('Exile log')
+        .setColor('#5599ff')
+        .setDescription(`${member.user.username} has been exiled`)
+        .setFooter(`Exiled by: ${message.author.username}`, `${message.author.avatarURL}`);
+
+      const channel = message.client.channels.find('id', annoncesIdChannel);
+      channel.send({ embed });
+
       return message.reply(`<@${member.id}> has been exiled !`);
     });
   },

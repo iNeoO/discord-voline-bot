@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { moderatorIdRole, memberIdRole } = require('../config.json');
+const { moderatorIdRole, memberIdRole, annoncesIdChannel } = require('../config.json');
 const { isAuthorized } = require('../helpers/permission.js');
 
 module.exports = {
@@ -12,6 +12,16 @@ module.exports = {
     isAuthorized(message, tagNeededMsg, notAllowedMsg, roles, (member) => {
       setTimeout(() => {
         member.kick();
+
+        const embed = new Discord.RichEmbed()
+          .setTitle('Exile log')
+          .setColor('#5599ff')
+          .setDescription(`${member.user.username} has been purged`)
+          .setFooter(`Purged by: ${message.author.username}`, `${message.author.avatarURL}`);
+
+        const channel = message.client.channels.find('id', annoncesIdChannel);
+        channel.send({ embed });
+
         return message.reply(`<@${member.id}> has been purged !`);
       }, 5000);
       message.channel.send(`<@${member.id}>`,

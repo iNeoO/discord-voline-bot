@@ -17,7 +17,6 @@ module.exports = {
       .setDescription(`${question}`)
       .setFooter(`Poll Started By: ${message.author.username}`, `${message.author.avatarURL}`);
 
-
     const channel = message.client.channels.find('id', voteIdChannel);
     channel.send({ embed }).then((messageAnswered) => {
       messageAnswered.react('👍')

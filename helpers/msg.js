@@ -8,8 +8,11 @@ List of commands :
  - !international : play international song
  - !leave : make bot leave vocal-channel
  - !meme : Display meme image
- - !propagande : Display propagande image
+ - !modos : Random new modos (need to be moderator)
+ - !poll : Create a poll with pos/neg/abs
+ - !polls : Create a poll multiple answers
  - !promote [@someone] : Give rights to someone
+ - !propagande : Display propagande image
  - !purge [@someone] : Kick someone from the Discord
  - !q : answer yes or no
  - !rate : give a number between 0 and 10 to rate something
