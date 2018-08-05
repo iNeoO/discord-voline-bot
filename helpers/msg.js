@@ -11,7 +11,8 @@ List of commands :
  - !modos : Random new modos (need to be moderator)
  - !poll : Create a poll with pos/neg/abs
  - !polls : Create a poll multiple answers
- - !promote [@someone] : Give rights to someone
+ - !promoteinvite [@someone] : Give rights to someone
+ - !promotemember [@someone] : Give rights to someone
  - !propagande : Display propagande image
  - !purge [@someone] : Kick someone from the Discord
  - !q : answer yes or no

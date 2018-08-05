@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { moderatorIdRole, memberIdRole, annoncesIdChannel } = require('../config.json');
+const { moderatorIdRole, memberIdRole, invitedIdRole, annoncesIdChannel } = require('../config.json');
 const { isAuthorized } = require('../helpers/permission.js');
 
 module.exports = {
@@ -10,8 +10,19 @@ module.exports = {
     const notAllowedMsg = 'you are not allowed to purge anybody';
     const roles = [moderatorIdRole, memberIdRole];
     isAuthorized(message, tagNeededMsg, notAllowedMsg, roles, (member) => {
+      const rolesId = [moderatorIdRole, memberIdRole, invitedIdRole];
+      let hasRole = false;
+      for (let i = 0; i < rolesId.length; i += 1) {
+        if(member.roles.has(roles[i])) {
+          hasRole = true;
+          break;
+        }
+      }
+      if (hasRole) {
+        return message.reply('This user can\'t be purged');
+      }
       setTimeout(() => {
-        member.kick();
+        // member.kick();
 
         const embed = new Discord.RichEmbed()
           .setTitle('Exile log')
