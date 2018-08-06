@@ -13,6 +13,7 @@ module.exports = {
       return message.reply('**Invalid number of answers (Max 10)**');
     }
     const emojiChoices = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣', '9⃣', '🔟'];
+    const emojiNeutral = '🤷';
     let question = `${questionArray[0]} \n\n`;
     for(let i = 1; i < questionArray.length; i += 1) {
       question += `${i} : ${questionArray[i]} \n`;
@@ -28,6 +29,7 @@ module.exports = {
       for (let i = 0; i < questionArray.length - 1; i++) {
         reactionArray[i] = await messageAnswered.react(emojiChoices[i]);
       }
+      reactionArray.push(await messageAnswered.react(emojiNeutral));
     });
   },
 };
