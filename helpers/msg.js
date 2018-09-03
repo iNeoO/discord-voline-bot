@@ -3,20 +3,21 @@ module.exports = {
 \`\`\`
 List of commands :
  - @VolineBot : Write a quote
- - !anthem : play anthem song
+ - !anthem : Play anthem song
+ - !clivage : Answer with sé de drouate or sé de gôche
  - !exile [@someone] : Remove all roles an give Contre révolitionnaire role
- - !international : play international song
- - !leave : make bot leave vocal-channel
+ - !international : Play international song
+ - !leave : Make bot leave vocal-channel
  - !meme : Display meme image
  - !modos : Random new modos (need to be moderator)
- - !poll : Create a poll with pos/neg/abs
- - !polls : Create a poll multiple answers
- - !promoteinvite [@someone] : Give rights to someone
- - !promotemember [@someone] : Give rights to someone
+ - !poll : Create a poll with pos/neg/abs (need to be moderator or member)
+ - !polls : Create a poll multiple answers (need to be moderator or member)
+ - !promoteinvite [@someone] : Give rights to someone (need to be moderator or member)
+ - !promotemember [@someone] : Give rights to someone (need to be moderator)
  - !propagande : Display propagande image
  - !purge [@someone] : Kick someone from the Discord
- - !q : answer yes or no
- - !rate : give a number between 0 and 10 to rate something
+ - !q : Answer yes or no
+ - !rate : Give a number between 0 and 10 to rate something
  - !help : Display this message
 \`\`\`
 `,
