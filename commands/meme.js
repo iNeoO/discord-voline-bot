@@ -1,6 +1,4 @@
-const Discord = require('discord.js');
 const { memeCdnUrl, memeCdnNb } = require('../config.json');
-const { download } = require('../helpers/download.js');
 
 module.exports = {
   name: 'meme',
@@ -15,8 +13,6 @@ module.exports = {
     } else {
       memeNb = Math.floor((Math.random() * memeCdnNb) + 1);
     }
-    download(`${memeCdnUrl}${memeNb}`, 'goulag.jpg', () => {
-      return message.channel.send(`img ${memeNb}`, new Discord.Attachment('./static/img/goulag.jpg', 'goulag.jpg'));
-    });
+    return message.channel.send(`${memeCdnUrl}${memeNb}`);
   },
 };
