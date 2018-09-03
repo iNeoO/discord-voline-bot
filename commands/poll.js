@@ -1,28 +1,35 @@
 const Discord = require('discord.js');
-const { voteIdChannel } = require('../config.json');
+const { voteIdChannel, moderatorIdRole, memberIdRole } = require('../config.json');
+const { isAuthorized } = require('../helpers/permission.js');
+
 
 module.exports = {
   name: 'poll',
   description: 'Make a poll',
   execute(message, args) {
 
-    const question = args.slice(0).join(' ');
-    if (args.length === 0) {
-      return message.reply('**Invalid Format:** `!poll <Question>`');
-    }
+    const tagNeededMsg = '';
+    const notAllowedMsg = 'you are not allowed to launch a vote';
+    const roles = [moderatorIdRole, memberIdRole];
+    isAuthorized(message, tagNeededMsg, notAllowedMsg, roles, () => {
+      const question = args.slice(0).join(' ');
+      if (args.length === 0) {
+        return message.reply('**Invalid Format:** `!poll <Question>`');
+      }
 
-    const embed = new Discord.RichEmbed()
-      .setTitle('A Poll Has Been Started!')
-      .setColor('#5599ff')
-      .setDescription(`${question}`)
-      .setFooter(`Poll Started By: ${message.author.username}`, `${message.author.avatarURL}`);
+      const embed = new Discord.RichEmbed()
+        .setTitle('A Poll Has Been Started!')
+        .setColor('#5599ff')
+        .setDescription(`${question}`)
+        .setFooter(`Poll Started By: ${message.author.username}`, `${message.author.avatarURL}`);
 
-    const channel = message.client.channels.find('id', voteIdChannel);
-    channel.send({ embed }).then((messageAnswered) => {
-      messageAnswered.react('👍')
-        .then(() => messageAnswered.react('👎'))
-        .then(() => messageAnswered.react('🤷'))
-        .catch(() => messageAnswered.error('Emoji failed to react.'));
+      const channel = message.client.channels.find('id', voteIdChannel);
+      channel.send({ embed }).then((messageAnswered) => {
+        messageAnswered.react('👍')
+          .then(() => messageAnswered.react('👎'))
+          .then(() => messageAnswered.react('🤷'))
+          .catch(() => messageAnswered.error('Emoji failed to react.'));
+      });
     });
   },
 };
