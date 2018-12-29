@@ -10,9 +10,12 @@
   "author": "Valère Pique <pique.valere@gmx.fr>",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "discord.js": "^11.3.2",
     "eslint": "^5.0.1",
     "node-opus": "^0.3.0",
+    "phantom": "^6.0.3",
+    "puppeteer": "^1.11.0",
     "request": "^2.87.0"
   }
 }

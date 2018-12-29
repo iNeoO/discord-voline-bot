@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { voteIdChannel, moderatorIdRole, memberIdRole } = require('../config.json');
+const { voteIdChannel, moderatorIdRole, actifIdRole } = require('../config.json');
 const { isAuthorized } = require('../helpers/permission.js');
 
 
@@ -10,7 +10,7 @@ module.exports = {
 
     const tagNeededMsg = '';
     const notAllowedMsg = 'you are not allowed to launch a vote';
-    const roles = [moderatorIdRole, memberIdRole];
+    const roles = [moderatorIdRole, actifIdRole];
     isAuthorized(message, tagNeededMsg, notAllowedMsg, roles, () => {
       const question = args.slice(0).join(' ');
       if (args.length === 0) {

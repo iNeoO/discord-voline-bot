@@ -1,7 +1,10 @@
 const fs = require('fs');
 const Discord = require('discord.js');
 const { id, prefix, token } = require('./config.json');
-const { quotes } = require('./helpers/msg.js');
+const { quotes } = require('./helpers/quotes.js');
+const {
+  lobbyIdChannel,
+} = require('./config.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -27,7 +30,7 @@ client.on('message', message => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).split(/ +/);
-  const command = args.shift().toLowerCase();
+  const command = args.shift();
   if (!client.commands.has(command)) return;
 
   try {
@@ -37,6 +40,16 @@ client.on('message', message => {
     console.error(error);
     message.reply('there was an error trying to execute that command!');
   }
+});
+
+client.on('guildMemberAdd', member => {
+  member.guild.channels.get(lobbyIdChannel).send(`
+Bienvenue <@${member.id}>, nous vous invitons à lire les règles et à :
+  - vous présenter (optionnel)
+  - vous définir politiquement (si vous n'êtes pas politisé, précisez le quand même)
+  - donner votre avis sur les règles et les valeurs du serveur
+  - d'où avez vous reçu votre invitation ?`,
+  new Discord.Attachment('./static/img/block.jpg', 'block.jpg'));
 });
 
 client.on('error', console.error);
