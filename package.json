@@ -1,7 +1,7 @@
 {
-  "name": "staline-bot",
+  "name": "discord-voline-bot",
   "version": "1.0.0",
-  "description": "A staine bot for discord",
+  "description": "A voline bot for discord",
   "main": "index.js",
   "scripts": {
     "start": "node .",
@@ -11,10 +11,10 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
-    "discord.js": "^11.3.2",
+    "discord.js": "^11.4.2",
     "eslint": "^5.0.1",
-    "node-opus": "^0.3.0",
-    "phantom": "^6.0.3",
+    "form-data": "^2.3.3",
+    "node-opus": "^0.3.1",
     "puppeteer": "^1.11.0",
     "request": "^2.87.0"
   }

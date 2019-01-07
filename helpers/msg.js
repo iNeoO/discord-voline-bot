@@ -22,6 +22,7 @@ List of commands :
  - !propagande : Display propagande image
  - !kick [@someone] : Kick someone from the Discord (need to be moderator)
  - !q : Answer yes or no
+ - !radio [url]: Set the bot join chanel and play radio (default radiolib)
  - !rate : Give a number between 0 and 10 to rate something
  - !help : Display this message
 \`\`\`
