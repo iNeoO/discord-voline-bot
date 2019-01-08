@@ -24,6 +24,7 @@ List of commands :
  - !q : Answer yes or no
  - !radio [url]: Set the bot join chanel and play radio (default radiolib)
  - !rate : Give a number between 0 and 10 to rate something
+ - !yt [url]: Set the bot join chanel and play the sound of a youtube video
  - !help : Display this message
 \`\`\`
 `,
