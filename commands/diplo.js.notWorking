@@ -1,0 +1,34 @@
+const Discord = require('discord.js');
+const puppeteer = require('puppeteer');
+const fs = require('fs');
+const { login, password } = require('../config.json');
+
+
+module.exports = {
+  name: 'diplo',
+  description: 'get a diplo article',
+  execute(message, args) {
+    if (!args.length) {
+      return message.reply('**No url:** `!diplo <url>`');
+    }
+    (async () => {
+      const browser = await puppeteer.launch({ headeless: false });
+      const page = await browser.newPage();
+      await page.goto(args[0]);
+      const button = await page.$('#session_connexion');
+      await button.click();
+      await page.waitFor(1000);
+      await page.type('input[name="email"]', login);
+      await page.type('input[name="mot_de_passe"]', password);
+      const validation = await page.$('input[name="valider"]');
+      await validation.click();
+      await page.pdf({ path: './pdf/diplo.pdf', format: 'A4' });
+      await browser.close();
+      return message.reply('your file : ',
+        new Discord.Attachment('./pdf/diplo.pdf', './pdf/diplo.pdf'),
+      ).then(() => {
+        fs.unlinkSync('./pdf/diplo.pdf');
+      });
+    })();
+  },
+};
