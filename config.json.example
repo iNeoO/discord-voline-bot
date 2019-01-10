@@ -1,0 +1,16 @@
+{
+  "prefix": "", // Command prefix to listen for bot
+  "id":"", // Id of the bot
+  "token": "", // Token of the bot
+  "memeCdnUrl": "", // Url of cdn
+  "moderatorIdRole": "", // Id of moderator
+  "memberIdRole": "", // Id of member
+  "actifIdRole": "", // Id of actif 
+  "voteIdChannel": "", // Id chanel where will be post polls
+  "lobbyIdChannel": "", // Lobby id chanel for welcome message
+  "annoncesIdChannel": "", // Id for log channel
+  "memeCdnNb": , // Number of meme on the cdn
+  "propagandeCdnNb": , // Number of propagande img on cdn
+  "login": "", // Login for mediapart/asi 
+  "password": "", // Password for mediapart/asi
+}
