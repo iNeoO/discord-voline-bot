@@ -13,7 +13,7 @@ module.exports = {
     }
     (async () => {
       const browser = await puppeteer.launch();
-      const page = await browser.newPage();
+      const page = await browser.newPage({args: ['--no-sandbox', '--disable-setuid-sandbox']});
       await page.goto(args[0]);
       await page.waitFor('.login-menu-button', { visible: true });
       const connection = await page.evaluateHandle(() => {
