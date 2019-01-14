@@ -12,7 +12,7 @@ module.exports = {
       return message.reply('**No url:** `!mediapart <url>`');
     }
     (async () => {
-      const browser = await puppeteer.launch({args: ['--no-sandbox', '--disable-setuid-sandbox']});
+      const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
       const page = await browser.newPage();
       await page.goto(args[0]);
       await page.type('#edit-name-content', login);

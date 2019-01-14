@@ -5,7 +5,7 @@ const {
   memberIdRole,
   annoncesIdChannel,
   actifIdRole,
-  // exileIdRole,
+  exileIdRole,
 } = require('../config.json');
 
 module.exports = {
@@ -18,18 +18,18 @@ module.exports = {
     const roles = [moderatorIdRole, actifIdRole];
     isAuthorized(message, tagNeededMsg, notAllowedMsg, roles, (member) => {
       const memberRole = message.guild.roles.get(memberIdRole);
-      // const exileRole = message.guild.roles.get(exileIdRole);
-      // member.removeRole(exileRole).catch(console.error);
+      const exileRole = message.guild.roles.get(exileIdRole);
+      member.removeRole(exileRole).catch(console.error);
       member.addRole(memberRole).catch(console.error);
 
-      const embed = new Discord.RichEmbed()
-        .setTitle('Promote log')
-        .setColor('#5599ff')
-        .setDescription(`${member.user.username} has been promote ! \n${reason}`)
-        .setFooter(`Promote by: ${message.author.username}`, `${message.author.avatarURL}`);
-
-      const channel = message.client.channels.find('id', annoncesIdChannel);
-      channel.send({ embed });
+      // const embed = new Discord.RichEmbed()
+      //   .setTitle('Promote log')
+      //   .setColor('#5599ff')
+      //   .setDescription(`${member.user.username} has been promote ! \n${reason}`)
+      //   .setFooter(`Promote by: ${message.author.username}`, `${message.author.avatarURL}`);
+      //
+      // const channel = message.client.channels.find('id', annoncesIdChannel);
+      // channel.send({ embed });
 
       return message.reply(`<@${member.id}> has been promoted !`,
         new Discord.Attachment('./static/img/welcome-in.jpg', 'welcome-in.jpg'),

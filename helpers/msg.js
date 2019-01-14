@@ -4,10 +4,9 @@ module.exports = {
 List of commands :
  - @VolineBot : Write a quote
  - !anthem : Play anthem song
- - !asi [url]: get link of an emission or article 
- - !clivage : Answer with sé de drouate or sé de gôche ` +
-// - !exile [@someone] : Remove all roles an give Contre révolitionnaire role
-`
+ - !asi [url]: get link of an emission or article
+ - !clivage : Answer with sé de drouate or sé de gôche
+ - !exile [@someone] : Remove all roles an give Contre révolitionnaire role
  - !international : Play international song
  - !leave : Make bot leave vocal-channel
  - !mediapart [url] : convert mediapart article to pdf

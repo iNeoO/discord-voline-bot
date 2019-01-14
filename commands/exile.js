@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { exileIdRole, moderatorIdRole, memberIdRole, invitedIdRole, annoncesIdChannel } = require('../config.json');
+const { exileIdRole, moderatorIdRole, memberIdRole, actifIdRole, annoncesIdChannel } = require('../config.json');
 const { isAuthorized } = require('../helpers/permission.js');
 
 module.exports = {
@@ -9,9 +9,9 @@ module.exports = {
     const reason = args.slice(1).join(' ');
     const tagNeededMsg = 'you need to tag a user in order to exile them!';
     const notAllowedMsg = 'you are not allowed to exile anybody';
-    const roles = [moderatorIdRole, memberIdRole];
+    const roles = [moderatorIdRole, actifIdRole];
     isAuthorized(message, tagNeededMsg, notAllowedMsg, roles, (member) => {
-      const rolesToRemove = [moderatorIdRole, memberIdRole, invitedIdRole];
+      const rolesToRemove = [moderatorIdRole, memberIdRole, actifIdRole];
       for (let i = 0; i < rolesToRemove.length; i += 1) {
         const roleToRemove = message.guild.roles.get(rolesToRemove[i]);
         member.removeRole(roleToRemove).catch(console.error);
