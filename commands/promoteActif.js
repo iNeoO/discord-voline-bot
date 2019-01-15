@@ -21,14 +21,16 @@ module.exports = {
       member.removeRole(exileRole).catch(console.error);
       member.addRole(actifRole).catch(console.error);
 
-      const embed = new Discord.RichEmbed()
-        .setTitle('Promote log')
-        .setColor('#5599ff')
-        .setDescription(`${member.user.username} has been promote ! \n${reason}`)
-        .setFooter(`Promote by: ${message.author.username}`, `${message.author.avatarURL}`);
+      if (reason) {
+        const embed = new Discord.RichEmbed()
+          .setTitle('Promote log')
+          .setColor('#5599ff')
+          .setDescription(`${member.user.username} has been promote ! \n${reason}`)
+          .setFooter(`Promote by: ${message.author.username}`, `${message.author.avatarURL}`);
 
-      const channel = message.client.channels.find('id', annoncesIdChannel);
-      channel.send({ embed });
+        const channel = message.client.channels.find('id', annoncesIdChannel);
+        channel.send({ embed });
+      }
 
       return message.reply(`<@${member.id}> has been promoted !`);
     });

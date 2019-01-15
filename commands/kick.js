@@ -36,15 +36,16 @@ module.exports = {
       }
       setTimeout(() => {
         member.kick();
+        if (reason) {
+          const embed = new Discord.RichEmbed()
+            .setTitle('Kick log')
+            .setColor('#5599ff')
+            .setDescription(`${member.user.username} has been kicked ! \n${reason}`)
+            .setFooter(`Kicked by: ${message.author.username}`, `${message.author.avatarURL}`);
 
-        const embed = new Discord.RichEmbed()
-          .setTitle('Kick log')
-          .setColor('#5599ff')
-          .setDescription(`${member.user.username} has been kicked ! \n${reason}`)
-          .setFooter(`Kicked by: ${message.author.username}`, `${message.author.avatarURL}`);
-
-        const channel = message.client.channels.find('id', annoncesIdChannel);
-        channel.send({ embed });
+          const channel = message.client.channels.find('id', annoncesIdChannel);
+          channel.send({ embed });
+        }
 
         return message.reply(`<@${member.id}> has been kicked !`);
       }, 5000);
