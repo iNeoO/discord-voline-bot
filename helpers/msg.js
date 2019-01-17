@@ -5,6 +5,7 @@ List of commands :
  - @VolineBot : Write a quote
  - !anthem : Play anthem song
  - !asi [url]: get link of an emission or article
+ - !clear : Clean message in a channel (need to be moderator)
  - !clivage : Answer with sé de drouate or sé de gôche
  - !exile [@someone] : Remove all roles an give Contre révolitionnaire role
  - !international : Play international song
