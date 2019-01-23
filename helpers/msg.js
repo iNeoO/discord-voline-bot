@@ -2,13 +2,15 @@ module.exports = {
   helpMessage: `
 \`\`\`
 List of commands :
- - @VolineBot : Write a quote
- - !anthem : Play anthem song
+ - @VolineBot : Write a quote` +
+// - !anthem : Play anthem song
+`
  - !asi [url]: get link of an emission or article
  - !clear : Clean message in a channel (need to be moderator)
  - !clivage : Answer with sé de drouate or sé de gôche
- - !exile [@someone] : Remove all roles an give Contre révolitionnaire role
- - !international : Play international song
+ - !exile [@someone] : Remove all roles an give Contre révolitionnaire role` +
+// - !international : Play international song
+`
  - !leave : Make bot leave vocal-channel
  - !mediapart [url] : convert mediapart article to pdf
  - !meme : Display meme image` +
@@ -25,7 +27,12 @@ List of commands :
  - !q : Answer yes or no
  - !radio [url]: Set the bot join chanel and play radio (default radiolib)
  - !rate : Give a number between 0 and 10 to rate something
- - !yt [url]: Set the bot join chanel and play the sound of a youtube video
+ - !yt | [url]: Set the bot join chanel and play the playlist or an url (when mentioned)
+ - !ytAdd [url]: Add a music in the playList
+ - !ytClear: Clear the list of music
+ - !ytList: display the playList
+ - !ytRemove [number]: remove an music by index in the playlist
+ - !ytSkip: skip the actual music
  - !help : Display this message
 \`\`\`
 `,

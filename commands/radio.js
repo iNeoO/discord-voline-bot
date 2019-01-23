@@ -1,3 +1,6 @@
+const { playSong } = require('../helpers/song');
+const { getters, setters } = require('../state/playList');
+
 module.exports = {
   name: 'radio',
   description: 'Join a vocal channel and play radio libertaire',
@@ -12,10 +15,22 @@ module.exports = {
           const dispatcher = connection.playArbitraryInput(radio);
           dispatcher.on('end', () => {
             if (message.member.voiceChannel) {
+              return;
+            }
+            if (!getters.getNbPlayList()) {
+              setters.setConnection();
+              setters.setPlayingSong();
               message.member.voiceChannel.leave();
+            } else {
+              const nextSongUrl = getters.shiftplayList().url;
+              playSong(message, connection, nextSongUrl);
             }
           });
-          dispatcher.on('error', console.error);
+          dispatcher.on('error', (e) => {
+            setters.setConnection();
+            setters.clear();
+            console.error(e);
+          });
         })
         .catch(console.log);
     } else {
