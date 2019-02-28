@@ -3,7 +3,7 @@ const { exileIdRole, moderatorIdRole, memberIdRole, actifIdRole, annoncesIdChann
 const { isAuthorized } = require('../helpers/permission.js');
 
 module.exports = {
-  name: 'exile',
+  name: 'mediation',
   description: 'Tag a member and exile them. roleid 464733224627863552',
   execute(message, args) {
     const reason = args.slice(1).join(' ');
