@@ -5,7 +5,7 @@ const {
   memberIdRole,
   annoncesIdChannel,
   actifIdRole,
-  exileIdRole,
+  mediationIdRole,
 } = require('../config.json');
 
 module.exports = {
@@ -18,8 +18,8 @@ module.exports = {
     const roles = [moderatorIdRole, actifIdRole];
     isAuthorized(message, tagNeededMsg, notAllowedMsg, roles, (member) => {
       const memberRole = message.guild.roles.get(memberIdRole);
-      const exileRole = message.guild.roles.get(exileIdRole);
-      member.removeRole(exileRole).catch(console.error);
+      const mediationRole = message.guild.roles.get(mediationIdRole);
+      member.removeRole(mediationRole).catch(console.error);
       member.addRole(memberRole).catch(console.error);
 
       if (reason) {

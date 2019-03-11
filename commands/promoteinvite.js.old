@@ -5,7 +5,7 @@ const {
   memberIdRole,
   invitedIdRole,
   annoncesIdChannel,
-  // exileIdRole,
+  // mediationIdRole,
 } = require('../config.json');
 
 module.exports = {
@@ -18,8 +18,8 @@ module.exports = {
     const roles = [moderatorIdRole, memberIdRole];
     isAuthorized(message, tagNeededMsg, notAllowedMsg, roles, (member) => {
       const invitedRole = message.guild.roles.get(invitedIdRole);
-      // const exileRole = message.guild.roles.get(exileIdRole);
-      // member.removeRole(exileRole).catch(console.error);
+      // const mediationRole = message.guild.roles.get(mediationIdRole);
+      // member.removeRole(mediationRole).catch(console.error);
       member.addRole(invitedRole).catch(console.error);
 
       const embed = new Discord.RichEmbed()
