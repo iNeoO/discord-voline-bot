@@ -1,3 +1,5 @@
+const { adminIds } = require('../config.json');
+
 module.exports = {
   isAuthorized: (message, tagNeededMsg, notAllowedMsg, roles, callback) => {
     if (tagNeededMsg && !message.mentions.users.size) {
@@ -12,7 +14,7 @@ module.exports = {
         break;
       }
     }
-    if(hasRole) {
+    if(hasRole || adminIds.indexOf(author.id) !== -1) {
       callback(member, author);
     } else {
       return message.reply(notAllowedMsg);

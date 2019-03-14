@@ -2,8 +2,10 @@ const fs = require('fs');
 const Discord = require('discord.js');
 const { id, prefix, token } = require('./config.json');
 const { quotes } = require('./helpers/quotes.js');
+const { getRss } = require('./helpers/rss.js');
 const {
   lobbyIdChannel,
+  newsIdChannel,
 } = require('./config.json');
 
 const client = new Discord.Client();
@@ -19,6 +21,14 @@ for (const file of commandFiles) {
 client.on('ready', () => {
   client.user.setActivity('Fighting red fascism');
   console.log('Ready!');
+  // init rss
+  (async () => {
+    await getRss();
+  })();
+  setInterval(async () => {
+    const texts = await getRss();
+    texts.forEach(text => client.channels.get(newsIdChannel).send(text));
+  }, 1000 * 60 * 60);
 });
 
 client.on('message', message => {

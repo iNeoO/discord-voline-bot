@@ -27,6 +27,7 @@ List of commands :
  - !q : Answer yes or no
  - !radio [url]: Set the bot join chanel and play radio (default radiolib)
  - !rate : Give a number between 0 and 10 to rate something
+ - !rss : Check for news on rss
  - !yt | [url]: Set the bot join chanel and play the playlist or an url (when mentioned)
  - !ytAdd [url]: Add a music in the playList
  - !ytClear: Clear the list of music
