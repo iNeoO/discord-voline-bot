@@ -15,11 +15,11 @@ const getRss = async () => {
     };
   });
   if (!getters.getArticles().length) {
-    items.pop();
     setters.set(items);
     return [];
   }
   const articles = getters.getArticles();
+  setters.set(items);
   const newArticles = items.filter(item =>
     !articles.find(article => article.title === item.title));
   if (newArticles.length) {
@@ -27,6 +27,7 @@ const getRss = async () => {
       return `**${art.title}** - ${art.link} \n- ${art.categories.join('\n- ')}\n`;
     });
   }
+  return [];
 };
 
 module.exports = {
