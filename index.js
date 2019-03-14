@@ -62,5 +62,9 @@ Bienvenue <@${member.id}>, nous vous invitons à lire les règles et à :
   new Discord.Attachment('./static/img/block.jpg', 'block.jpg'));
 });
 
-client.on('error', console.error);
+client.on('error', (e) => {
+  console.error('____');
+  console.error((new Date()).toISOString());
+  console.error(e);
+});
 client.login(token);
