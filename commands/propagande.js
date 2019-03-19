@@ -1,4 +1,4 @@
-const { memeCdnUrl, propagandeCdnNb } = require('../config.json');
+const { memeCdnUrl, propagandeCdnNb } = require('../config.js');
 
 module.exports = {
   name: 'propagande',

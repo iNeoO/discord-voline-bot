@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { moderatorIdRole, annoncesIdChannel, volontaireIdRole } = require('../config.json');
+const { moderatorIdRole, annoncesIdChannel, volontaireIdRole } = require('../config.js');
 const { isAuthorized } = require('../helpers/permission.js');
 
 module.exports = {

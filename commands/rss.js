@@ -6,10 +6,15 @@ module.exports = {
   execute(message) {
     (async () => {
       try {
-        const texts = await getRss();
-        if (texts.length) {
-          texts.forEach(text => message.channel.send(text));
-        } else {
+        const articles = await getRss();
+        let isEmpty = true;
+        articles.forEach(text => {
+          if(text.length) {
+            isEmpty = false;
+            message.channel.send(text);
+          }
+        });
+        if (isEmpty) {
           message.reply('Sry no news atm');
         }
       } catch(e) {

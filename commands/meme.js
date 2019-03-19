@@ -1,4 +1,4 @@
-const { memeCdnUrl, memeCdnNb } = require('../config.json');
+const { memeCdnUrl, memeCdnNb } = require('../config.js');
 
 module.exports = {
   name: 'meme',

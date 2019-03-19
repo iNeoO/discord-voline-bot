@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const { memeCdnUrl } = require('../config.json');
+const { memeCdnUrl } = require('../config.js');
 
 module.exports = {
   name: 'clivage',

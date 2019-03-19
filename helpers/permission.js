@@ -1,4 +1,4 @@
-const { adminIds } = require('../config.json');
+const { adminIds } = require('../config.js');
 
 module.exports = {
   isAuthorized: (message, tagNeededMsg, notAllowedMsg, roles, callback) => {

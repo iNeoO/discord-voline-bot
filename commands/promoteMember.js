@@ -6,7 +6,7 @@ const {
   annoncesIdChannel,
   actifIdRole,
   mediationIdRole,
-} = require('../config.json');
+} = require('../config.js');
 
 module.exports = {
   name: 'promoteMember',

@@ -1,16 +1,16 @@
 const state = {
-  articles: [],
+  dateUpdate: null,
 };
 
 const setters = {
-  set(articles) {
-    state.articles = articles;
+  setDateUpdate(date) {
+    state.dateUpdate = date;
   },
 };
 
 const getters = {
-  getArticles() {
-    return state.articles;
+  getDateUpdate() {
+    return state.dateUpdate;
   },
 };
 

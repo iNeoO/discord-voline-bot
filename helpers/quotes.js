@@ -98,6 +98,7 @@ Nom' de l' flam' estas am' al liber'."
   '"Our ideal is socialism, which aims at the equality of all classes. But just as a great building cannot be destroyed in a moment, the existing hierarchical class system, which has been consolidated over many years, cannot be overthrown in a day and a night ... So we [women] must first of all achieve the fundamanetal principle of \'self-awareness\', and develop our potential, uplift our character, and then gradually work toward the realization of our ideal. "\n-Kanno Sugako',
   '"I couldn\'t have thrown that bomb. I as at home making bombs. "\n-Louis Lingg',
   '"I have no particular love for the idealised \'worker\' as he appears in the bourgeois Communist\'s mind, but when I see an actual flesh-and-blood worker in conflict with his natural enemy, the policeman, I do not have to ask myself which side I am on. "\n-George Orwell',
+  '"Tout d\'abord, il n\'est pas vrai que la nature et le rôle du gouvernement changeraient si les conditions sociales étaient changées. L\'organe et la fonction sont des données inséparables. Otez sa fonction à un organe : l\'organe meurt, ou bien sa fonction se reconstitue. Faites entrer une armée dans un pays où il n\'y ait aucune cause de guerre, intestine ou avec l\'extérieur, ni aucune peur à ce sujet : l\'armée provoquera la guerre ou elle se dispersera si elle n\'y arrive pas. Là où il n\'y aurait ni crimes à découvrir ni délinquants à arrêter, une police provoquera et inventera crimes et délinquants ou bien elle disparaîtra."\n-Errico Malatesta',
 ];
 
 module.exports = {

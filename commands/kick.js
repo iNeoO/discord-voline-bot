@@ -4,7 +4,7 @@ const {
   // memberIdRole,
   // invitedIdRole,
   annoncesIdChannel,
-} = require('../config.json');
+} = require('../config.js');
 const { isAuthorized } = require('../helpers/permission.js');
 
 module.exports = {

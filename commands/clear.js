@@ -3,7 +3,7 @@ const {
 } = require('../helpers/permission.js');
 const {
   moderatorIdRole,
-} = require('../config.json');
+} = require('../config.js');
 
 module.exports = {
   name: 'clear',

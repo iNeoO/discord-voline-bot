@@ -1,33 +1,56 @@
 const axios = require('axios');
 const parser = require('xml2json');
-const { rssUrl } = require('../config.json');
+const { rss } = require('../config.js');
 const { getters, setters } = require('../state/rss');
 
 const getRss = async () => {
-  const { data } = await axios.get(rssUrl);
-  const json = parser.toJson(data, { object: true });
-  const itemList = json.rss.channel.item;
-  const items = itemList.map((item) => {
-    return {
-      title: item.title,
-      categories: item.category.map((cat) => cat.$t),
-      link: item.link,
-    };
-  });
-  if (!getters.getArticles().length) {
-    setters.set(items);
-    return [];
-  }
-  const articles = getters.getArticles();
-  setters.set(items);
-  const newArticles = items.filter(item =>
-    !articles.find(article => article.title === item.title));
-  if (newArticles.length) {
-    return newArticles.map((art) => {
-      return `**${art.title}** - ${art.link} \n- ${art.categories.join('\n- ')}\n`;
+  const lastUpdate = getters.getDateUpdate();
+  const newDate = new Date();
+  const articles = await Promise.all(rss.map(async ({ name, url }) => {
+    const { data } = await axios.get(url);
+    const json = parser.toJson(data, { object: true });
+    const itemList = json.rss.channel.item;
+    const items = itemList.filter((item) => {
+      const date = item.pubDate
+        ? new Date(item.pubDate)
+        : new Date(item['dc:date']);
+      return lastUpdate <= date;
+    }).map((item) => {
+      if (item.title) {
+        let categories;
+        if (item.category) {
+          categories = typeof item.category === 'string'
+            ? item.category
+            : item.category.map((cat) => {
+              if (cat.$t) {
+                return cat.$t;
+              }
+              return cat;
+            });
+        }
+        return {
+          title: item.title,
+          categories,
+          link: item.link,
+        };
+      }
     });
-  }
-  return [];
+    if (!items.length) {
+      return '';
+    }
+    const articlesText = `\n\n___***${name}***___\n\n`;
+    return items.reduce((acc, art) => {
+      let categories = '';
+      if (art.categories) {
+        categories = typeof art.categories === 'string'
+          ? `- ${art.categories}\n`
+          : `- ${art.categories.join('\n- ')}\n`;
+      }
+      return `${acc}**${art.title}** - ${art.link} \n${categories}\n`;
+    }, articlesText);
+  }));
+  setters.setDateUpdate(newDate);
+  return articles;
 };
 
 module.exports = {

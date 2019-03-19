@@ -1,12 +1,13 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const { id, prefix, token } = require('./config.json');
+const { id, prefix, token } = require('./config.js');
 const { quotes } = require('./helpers/quotes.js');
+const { setters } = require('./state/rss.js');
 const { getRss } = require('./helpers/rss.js');
 const {
   lobbyIdChannel,
   newsIdChannel,
-} = require('./config.json');
+} = require('./config.js');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -21,13 +22,15 @@ for (const file of commandFiles) {
 client.on('ready', () => {
   client.user.setActivity('Fighting red fascism');
   console.log('Ready!');
-  // init rss
-  (async () => {
-    await getRss();
-  })();
+  setters.setDateUpdate(new Date());
+
   setInterval(async () => {
-    const texts = await getRss();
-    texts.forEach(text => client.channels.get(newsIdChannel).send(text));
+    const articles = await getRss();
+    articles.forEach(text => {
+      if(text.length) {
+        client.channels.get(newsIdChannel).send(text);
+      }
+    });
   }, 1000 * 60 * 60);
 });
 
