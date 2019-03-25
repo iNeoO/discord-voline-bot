@@ -8,7 +8,14 @@ const getRss = async () => {
   const newDate = new Date();
   const articles = await Promise.all(rss.map(async ({ name, url }) => {
     const { data } = await axios.get(url);
-    const json = parser.toJson(data, { object: true });
+    let json = '';
+    try {
+      json = parser.toJson(data.trim(), { object: true });
+    } catch(e) {
+      console.log(`\n\n${new Date()}: ${name}`);
+      console.log(e);
+      return '';
+    }
     const itemList = json.rss.channel.item;
     const items = itemList.filter((item) => {
       const date = item.pubDate
