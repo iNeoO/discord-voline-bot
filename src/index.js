@@ -3,12 +3,16 @@ const path = require('path');
 const { Attachment, Embed } = require('discord.js');
 const Commando = require('discord.js-commando');
 const {
+  id,
   owner,
   prefix,
   token,
   newsIdChannel,
   lobbyIdChannel,
 } = require('@/config.js');
+const {
+  quotes,
+} = require('@helpers/quotes.js');
 const {
   setters,
 } = require('@states/rss.js');
@@ -48,6 +52,13 @@ client.on('ready', () => {
       }
     });
   }, 1000 * 60 * 60);
+});
+
+client.on('message', message => {
+  if (message.content.startsWith(`<@${id}>`) && !message.author.bot) {
+    const random = Math.floor((Math.random() * quotes.length));
+    message.reply(` ${quotes[random]}`);
+  }
 });
 
 client.on('guildMemberAdd', member => {
