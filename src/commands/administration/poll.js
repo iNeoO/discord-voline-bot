@@ -39,23 +39,28 @@ class Poll extends Command {
   run(msg, { question }) {
     const roles = [moderatorIdRole, actifIdRole];
     const { member } = msg;
-    isAuthorized(member, roles).then(() => {
-      msg.delete();
-      const embed = new RichEmbed()
-        .setTitle('A Poll Has Been Started!')
-        .setColor('#5599ff')
-        .setDescription(question)
-        .setFooter(`Poll Started By: ${msg.author.username}`, `${msg.author.avatarURL}`);
+    isAuthorized(member, roles).then((err) => {
+      if (!err) {
+        msg.delete();
+        const embed = new RichEmbed()
+          .setTitle('A Poll Has Been Started!')
+          .setColor('#5599ff')
+          .setDescription(question)
+          .setFooter(`Poll Started By: ${msg.author.username}`, `${msg.author.avatarURL}`);
 
-      const channel = msg.client.channels.find('id', voteIdChannel);
-      channel.send({ embed }).then((messageAnswered) => {
-        messageAnswered.react(emojiUp)
-          .then(() => messageAnswered.react(emojiDown))
-          .then(() => messageAnswered.react(emojiNeutral))
-          .catch(() => messageAnswered.error('Emoji failed to react.'));
-      });
-    }).catch(() => {
-      msg.reply('**You are not allowed to launch a poll.**');
+        const channel = msg.client.channels.find('id', voteIdChannel);
+        channel.send({ embed }).then((messageAnswered) => {
+          messageAnswered.react(emojiUp)
+            .then(() => messageAnswered.react(emojiDown))
+            .then(() => messageAnswered.react(emojiNeutral))
+            .catch(() => messageAnswered.error('Emoji failed to react.'));
+        });
+      } else {
+        msg.reply('**You are not allowed to launch a poll.**');
+      }
+    }).catch((e) => {
+      console.log(e);
+      msg.reply('Something went wrong');
     });
   }
 }

@@ -32,30 +32,38 @@ class Mediation extends Command {
     });
   }
 
-  run(msg, { user }) {
+  run(msg) {
     const roles = [moderatorIdRole, actifIdRole];
     const author = msg.member;
-    isAuthorized(author, roles).then(async () => {
-      if (!msg.mentions.users.size) {
-        return msg.reply('**You need to tag a user in order to set him in mediation.**');
+    isAuthorized(author, roles).then((err) => {
+      if (!err) {
+        const guardRoles = [
+          moderatorIdRole,
+        ];
+        const memberRole = msg.guild.roles.get(memberIdRole);
+        const mediationRole = msg.guild.roles.get(mediationIdRole);
+        const actifRole = msg.guild.roles.get(actifIdRole);
+        const user = msg.mentions.members.first();
+        isTargetAble(user, guardRoles).then((err) => {
+          if (!err) {
+            user.removeRole(memberRole).catch(console.error);
+            user.removeRole(actifRole).catch(console.error);
+            user.addRole(mediationRole).catch(console.error);
+            const reponse = `<@${user.id}> has been set in mediation.`;
+            msg.send.channel(reponse);
+          } else {
+            msg.reply(`**<@${user.id}> can't be set in mediation.**`);
+          }
+        }).catch((e) => {
+          console.log(e);
+          msg.reply('Something went wrong');
+        });
+      } else {
+        msg.reply('**You are not allowed to set anybody in mediation.**');
       }
-      const guardRoles = [
-        moderatorIdRole,
-      ];
-      const memberRole = msg.guild.roles.get(memberIdRole);
-      const mediationRole = msg.guild.roles.get(mediationIdRole);
-      const actifRole = msg.guild.roles.get(actifIdRole);
-      isTargetAble(user, guardRoles).then(() => {
-        user.removeRole(memberRole).catch(console.error);
-        user.removeRole(actifRole).catch(console.error);
-        user.addRole(mediationRole).catch(console.error);
-        const reponse = `<@${user.id}> has been set in mediation.`;
-        msg.send.channel(reponse);
-      }).catch(() => {
-        msg.reply(`**<@${user.id}> can't be set in mediation.**`);
-      });
-    }).catch(() => {
-      msg.reply('**You are not allowed to set anybody in mediation.**');
+    }).catch((e) => {
+      console.log(e);
+      msg.reply('Something went wrong');
     });
   }
 }
