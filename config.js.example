@@ -1,0 +1,26 @@
+module.exports = {
+  prefix: '', // Command prefix to listen for bot
+  id: '', // Id of the bot
+  token: '', // Token
+  memeCdnUrl: '', // Url of cdn
+  ownder: '', // Owner id
+  adminIds: [], // Id's list of Admins
+  moderatorIdRole: '', // Id of moderator role
+  memberIdRole: '', // Id of member role
+  actifIdRole: '', // Id of member role
+  mediationIdRole: '', // Id for mediation role
+  voteIdChannel: '', // Vote Id channel where post poll
+  lobbyIdChannel: '', // Lobby id chanel for welcome message
+  annoncesIdChannel: '', // Channel Id for logs
+  newsIdChannel: '', // Channel Id where news are post
+  memeCdnNb: , // Number of meme on the cdn
+  propagandeCdnNb: , // Number of propagande img on cdn
+  login: '', // Login for mediapart/asi/monde-diplomatique
+  password: '', // Password for mediapart/asi/monde-diplomatique
+  rss: [
+    {
+      url: '', // Url of the rss
+      name: '', // Name for display
+    },
+  ],
+};

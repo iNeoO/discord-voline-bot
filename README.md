@@ -1,22 +1,49 @@
 ## Simple Voline bot
 
+## Dependencies
+ - axios
+ - discord.js
+ - discord.js-commando
+ - module-alias
+ - node-opus
+ - puppeteer
+ - xml2json
+ - ytdl-core
+
 ## Commands
  - @VolineBot : Write a quote
- - !anthem : Play anthem song
- - !asi [url]: get link of an emission or article
- - !clivage : Answer with sé de drouate or sé de gôche
- - !international : Play international song
+
+### Administration
+ - !clear : Clean message in a channel (need to be moderator)
+ - !infos <@someone> : Get some info on someone
+ - !mediation <@someone> : Remove all roles an give "en Médiation" role (need to be actif or moderator)
+ - !poll <question> : Create a poll with pos/neg/abs (need to be moderator or actif)
+ - !polls <question> -- rep 1 -- rep2 -- rep3 ... : Create a poll multiple answers (need to be moderator or actif)
+ - !promote actif <@someone> : Give rights to someone (need to be moderator)
+ - !promote member <@someone> : Give rights to someone (need to be moderator or actif)
+ - !kick <@someone> : Kick someone from the Discord (need to be moderator)
+
+### Fun
+- !clivage <text> : Answer with sé de drouate or sé de gôche
+- !meme <index> : Display random meme image or the meme at the index provided
+- !propagande <index> : Display random propagande image or the propagande at the index provided
+- !q <text> : Answer yes or no
+- !rate <text> : Give a number between 0 and 10 to rate something
+
+### Media
+- !asi <url> : get link of an emission or the pdf of an article
+- !diplo <url> : convert monde-diplomatique article to pdf
+- !mediapart <url> : convert mediapart article to pdf
+- !propagande : Display propagande image
+- !rss : Check for news on rss
+
+### Vocal
  - !leave : Make bot leave vocal-channel
- - !mediapart [url] : convert mediapart article to pdf
- - !meme : Display meme image
- - !poll : Create a poll with pos/neg/abs (need to be moderator or member)
- - !polls : Create a poll multiple answers (need to be moderator or member)
- - !promoteActif [@someone] : Give rights to someone (need to be moderator)
- - !promoteMember [@someone] : Give rights to someone (need to be moderator or actif)
- - !propagande : Display propagande image
- - !kick [@someone] : Kick someone from the Discord (need to be moderator)
- - !q : Answer yes or no
- - !radio [url]: Set the bot join chanel and play radio (default radiolib)
- - !rate : Give a number between 0 and 10 to rate something
- - !yt [url]: Set the bot join chanel and play the sound of a youtube video
- - !help : Display this message
+ - !radio <url> : Set the bot join chanel and play radio (default radiolib)
+ - !yt : Commands to use bot in vocal with youtube
+       - !yt add <url> : Add a music in the playList
+       - !yt clear : Clear the playlist
+       - !yt list : Display the playlist
+       - !yt play <url> : Play the url or the playlist
+       - !yt remove <index> : Remove a music by index in the playlist
+       - !yt skip : Skip the actual music
