@@ -6,9 +6,7 @@ const media = [
   '- !rss : Check for news on rss',
 ];
 
-const vocal = [
-  '- !leave : Make bot leave vocal-channel',
-  '- !radio <url> : Set the bot join chanel and play radio (default radiolib)',
+const yt = [
   '- !yt : Commands to use bot in vocal with youtube',
   '      - !yt add <url> : Add a music in the playList',
   '      - !yt clear : Clear the playlist',
@@ -16,6 +14,12 @@ const vocal = [
   '      - !yt play <url> : Play the url or the playlist',
   '      - !yt remove <index> : Remove a music by index in the playlist',
   '      - !yt skip : Skip the actual music',
+];
+
+const vocal = [
+  '- !leave : Make bot leave vocal-channel',
+  '- !radio <url> : Set the bot join chanel and play radio (default radiolib)',
+  ...yt,
 ];
 
 const fun = [
@@ -46,9 +50,16 @@ const msgs = [
 
 const help = msgs.reduce((acc, msg) => `${acc}**${msg.key}**\n\`\`\`${msg.text.join('\n')}\`\`\`\n`, '');
 
-const rate = Array.apply(null, { length: 11 }).map(Number.call, (Number) => (Number < 10 ? `0${Number}` : Number) + '/10');
+const rate = Array.apply(null, { length: 11 }).map(Number.call, (Number) => (Number) + '/10');
+
+const formatingMsg = msgsArray => `\`\`\`${msgsArray.join('\n')}\`\`\`\n`;
 
 module.exports = {
   help,
   rate,
+  mediaHelper: formatingMsg(media),
+  ytHelper: formatingMsg(yt),
+  vocalHelper: formatingMsg(vocal),
+  funHelper: formatingMsg(fun),
+  administrationHelper: formatingMsg(administration),
 };

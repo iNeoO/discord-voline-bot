@@ -31,22 +31,4 @@ module.exports = {
   formatingDateTime(date) {
     return `${this.formatingDate(date)} ${this.formatingTime(date)}`;
   },
-  formatingParams(message, params, args) {
-    return new Promise((resolve, reject) => {
-      const paramsList = args.slice(0);
-      if (paramsList.includes('help') || paramsList.includes('h')) {
-        return reject(false);
-      }
-      const argsList = args.slice(1)
-        .filter(arg => !arg.includes('-'));
-      const paramsKeys = Object.keys(params);
-      const commandKey = paramsKeys.find(key => paramsList.includes(key)
-        || paramsList.includes(key.charAt(0)));
-      if (commandKey) {
-        resolve(params[commandKey].execute(message, argsList));
-      } else {
-        return reject(true);
-      }
-    });
-  },
 };
