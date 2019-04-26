@@ -41,9 +41,9 @@
  - !leave : Make bot leave vocal-channel
  - !radio <url> : Set the bot join chanel and play radio (default radiolib)
  - !yt : Commands to use bot in vocal with youtube
-       - !yt add <url> : Add a music in the playList
-       - !yt clear : Clear the playlist
-       - !yt list : Display the playlist
-       - !yt play <url> : Play the url or the playlist
-       - !yt remove <index> : Remove a music by index in the playlist
-       - !yt skip : Skip the actual music
+   - !yt add <url> : Add a music in the playList
+   - !yt clear : Clear the playlist
+   - !yt list : Display the playlist
+   - !yt play <url> : Play the url or the playlist
+   - !yt remove <index> : Remove a music by index in the playlist
+   - !yt skip : Skip the actual music
