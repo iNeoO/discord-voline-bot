@@ -19,7 +19,7 @@ class Yt extends Command {
       group: 'vocal',
       memberName: 'yt',
       description: 'yt commands',
-      examples: ['!help'],
+      examples: [ytHelper],
       args: [
         {
           key: 'command',
