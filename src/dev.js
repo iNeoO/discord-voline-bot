@@ -5,14 +5,7 @@ const {
   owner,
   // prefix,
   token,
-  newsIdChannel,
 } = require('@/config.js');
-const {
-  setters,
-} = require('@states/rss.js');
-const {
-  getRss,
-} = require('@helpers/rss.js');
 
 
 const client = new Commando.Client({
@@ -37,16 +30,6 @@ client.registry
 client.on('ready', () => {
   client.user.setActivity('Fighting red fascism');
   console.log('Ready!');
-  setters.setDateUpdate(new Date());
-
-  setInterval(async () => {
-    const articles = await getRss();
-    articles.forEach(text => {
-      if (text.length) {
-        client.channels.get(newsIdChannel).send(text);
-      }
-    });
-  }, 1000 * 60 * 60);
 });
 
 client.login(token);

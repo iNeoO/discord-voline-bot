@@ -1,6 +1,6 @@
 require('module-alias/register');
 const path = require('path');
-const { Attachment, Embed } = require('discord.js');
+const { Attachment, RichEmbed } = require('discord.js');
 const Commando = require('discord.js-commando');
 const {
   id,
@@ -63,7 +63,7 @@ client.on('message', message => {
 
 client.on('guildMemberAdd', member => {
   const { user } = member;
-  const embed = new Embed()
+  const embed = new RichEmbed()
     .setColor('RANDOM')
     .setThumbnail(user.avatarURL)
     .setTitle(`Bienvenue <@${member.id}>`)
