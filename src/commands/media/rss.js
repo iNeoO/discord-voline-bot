@@ -29,7 +29,7 @@ class Rss extends Command {
           msg.reply('Sry no news atm');
         }
       } catch(e) {
-        console.log(e);
+        console.error(e);
         msg.reply('Something went wrong');
       }
     })();

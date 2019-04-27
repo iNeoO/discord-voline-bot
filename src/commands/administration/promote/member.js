@@ -18,15 +18,13 @@ module.exports = (msg, user) => {
       const mediationRole = msg.guild.roles.get(mediationIdRole);
       user.removeRole(mediationRole).catch(console.error);
       user.addRole(memberRole).catch(console.error);
-      console.log('tututu');
-      console.log(user.id);
       return msg.channel.send(`<@${user.id}> has been promote member.`,
         new Discord.Attachment('./static/img/welcome-in.jpg', 'welcome-in.jpg'));
     } else {
       msg.reply('you are not allowed to promote anybody.');
     }
   }).catch((e) => {
-    console.log(e);
+    console.error(e);
     msg.reply('Something went wrong');
   });
 };

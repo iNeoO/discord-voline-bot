@@ -72,7 +72,7 @@ class Polls extends Command {
         msg.reply('**You are not allowed to launch a poll.**');
       }
     }).catch((e) => {
-      console.log(e);
+      console.error(e);
       msg.reply('Something went wrong');
     });
   }

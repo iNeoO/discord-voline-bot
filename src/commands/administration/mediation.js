@@ -55,14 +55,14 @@ class Mediation extends Command {
             msg.reply(`**<@${user.id}> can't be set in mediation.**`);
           }
         }).catch((e) => {
-          console.log(e);
+          console.error(e);
           msg.reply('Something went wrong');
         });
       } else {
         msg.reply('**You are not allowed to set anybody in mediation.**');
       }
     }).catch((e) => {
-      console.log(e);
+      console.error(e);
       msg.reply('Something went wrong');
     });
   }

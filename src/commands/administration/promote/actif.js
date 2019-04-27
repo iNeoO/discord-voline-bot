@@ -24,7 +24,7 @@ module.exports = (msg, user) => {
       msg.reply('you are not allowed to promote anybody.');
     }
   }).catch((e) => {
-    console.log(e);
+    console.error(e);
     msg.reply('Something went wrong');
   });
 };

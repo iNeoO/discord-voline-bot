@@ -54,7 +54,7 @@ class Kick extends Command {
             msg.reply('This user can\'t be kicked.');
           }
         }).catch((e) => {
-          console.log(e);
+          console.error(e);
           msg.reply('Something went wrong');
         });
       } else {

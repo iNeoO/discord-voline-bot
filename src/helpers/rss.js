@@ -12,8 +12,8 @@ const getRss = async () => {
     try {
       json = parser.toJson(data.trim(), { object: true });
     } catch(e) {
-      console.log(`\n\n${new Date()}: ${name}`);
-      console.log(e);
+      console.error(`\n\n${new Date()}: ${name}`);
+      console.error(e);
       return '';
     }
     const itemList = json.rss.channel.item;
