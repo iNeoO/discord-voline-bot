@@ -28,8 +28,8 @@ class Clear extends Command {
         msg.channel.fetchMessages().then(messages => {
           msg.channel.bulkDelete(messages);
         }).catch(err => {
-          msg.send.channel('Error while doing Bulk Delete');
-          msg.send.channel(`\`\`\`${err}\`\`\``);
+          msg.channel.send('Error while doing Bulk Delete');
+          msg.channel.send(`\`\`\`${err}\`\`\``);
         });
       }
     }).catch(() => {

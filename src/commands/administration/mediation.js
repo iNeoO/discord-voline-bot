@@ -50,7 +50,7 @@ class Mediation extends Command {
             user.removeRole(actifRole).catch(console.error);
             user.addRole(mediationRole).catch(console.error);
             const reponse = `<@${user.id}> has been set in mediation.`;
-            msg.send.channel(reponse);
+            msg.channel.send(reponse);
           } else {
             msg.reply(`**<@${user.id}> can't be set in mediation.**`);
           }

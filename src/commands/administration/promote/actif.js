@@ -19,7 +19,7 @@ module.exports = (msg, user) => {
       user.removeRole(mediationRole).catch(console.error);
       user.addRole(memberRole).catch(console.error);
       user.addRole(actifRole).catch(console.error);
-      return msg.send.channel(`<@${user.id}> has been promote actif.`);
+      return msg.channel.send(`<@${user.id}> has been promote actif.`);
     } else {
       msg.reply('you are not allowed to promote anybody.');
     }
