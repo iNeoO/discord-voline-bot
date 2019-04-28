@@ -32,7 +32,7 @@ class Mediation extends Command {
     });
   }
 
-  run(msg) {
+  run(msg, { user }) {
     const roles = [moderatorIdRole, actifIdRole];
     const author = msg.member;
     isAuthorized(author, roles).then((err) => {
@@ -43,12 +43,12 @@ class Mediation extends Command {
         const memberRole = msg.guild.roles.get(memberIdRole);
         const mediationRole = msg.guild.roles.get(mediationIdRole);
         const actifRole = msg.guild.roles.get(actifIdRole);
-        const user = msg.mentions.members.first();
-        isTargetAble(user, guardRoles).then((err) => {
+        const target = msg.guild.member(user);
+        isTargetAble(target, guardRoles).then((err) => {
           if (!err) {
-            user.removeRole(memberRole).catch(console.error);
-            user.removeRole(actifRole).catch(console.error);
-            user.addRole(mediationRole).catch(console.error);
+            target.removeRole(memberRole).catch(console.error);
+            target.removeRole(actifRole).catch(console.error);
+            target.addRole(mediationRole).catch(console.error);
             const reponse = `<@${user.id}> has been set in mediation.`;
             msg.channel.send(reponse);
           } else {

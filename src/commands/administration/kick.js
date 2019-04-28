@@ -31,7 +31,7 @@ class Kick extends Command {
     });
   }
 
-  run(msg) {
+  run(msg, { user }) {
     const roles = [
       moderatorIdRole,
     ];
@@ -41,7 +41,7 @@ class Kick extends Command {
         moderatorIdRole,
       ];
       if (!err) {
-        const target = msg.mentions.members.first();
+        const target = msg.guild.member(user);
         isTargetAble(target, guardRoles).then((err) => {
           if (!err) {
             setTimeout(() => {

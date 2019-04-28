@@ -26,14 +26,8 @@ class Infos extends Command {
     });
   }
 
-  run(msg) {
-    let user;
+  run(msg, { user }) {
     const { author } = msg;
-    if (msg.mentions.users.first()) {
-      user = msg.mentions.users.first();
-    } else {
-      user = msg.author;
-    }
     const member = msg.guild.member(user);
 
     const embed = new RichEmbed()
