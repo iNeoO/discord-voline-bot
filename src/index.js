@@ -68,12 +68,12 @@ client.on('guildMemberAdd', member => {
     .setThumbnail(user.avatarURL)
     .setTitle(`Bienvenue <@${member.id}>`)
     .setDescription('vous invitons à lire les règles et à :')
-    .setField('- vous présenter (optionnel)', '', true)
-    .setField('- vous définir politiquement (si vous n\'êtes pas politisé, précisez le quand même)', '', true)
-    .setField('- d\'où avez vous reçu votre invitation ?)', '', true)
+    .addField('- vous présenter (optionnel)', 'introduce yourself (optional)', true)
+    .addField('- vous définir politiquement (si vous n\'êtes pas politisé, précisez le quand même)', 'Define yourself politically (if you are not politicized, specify it anyway', true)
+    .addField('- d\'où avez vous reçu votre invitation ?', 'Where did you receive your invitation from ?', true)
     .setFooter('Quelqu\'un va passer pour te faire rentrer sur le serveur');
-  member.guild.channels.get(lobbyIdChannel).send({ embed },
-    new Attachment('./static/img/block.jpg', 'block.jpg'));
+  member.guild.channels.get(lobbyIdChannel).send({ embed });
+  member.guild.channels.get(lobbyIdChannel).send('', new Attachment('./static/img/block.jpg', 'block.jpg'));
 });
 
 client.login(token);
