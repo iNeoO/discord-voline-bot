@@ -1,6 +1,8 @@
 require('module-alias/register');
 const path = require('path');
-const { Attachment, RichEmbed } = require('discord.js');
+const {
+  RichEmbed,
+} = require('discord.js');
 const Commando = require('discord.js-commando');
 const {
   id,
@@ -66,14 +68,18 @@ client.on('guildMemberAdd', member => {
   const embed = new RichEmbed()
     .setColor('RANDOM')
     .setThumbnail(user.avatarURL)
-    .setTitle(`Bienvenue <@${member.id}>`)
+    .setTitle(`Bienvenue ${user.username}#${user.discriminator}`)
     .setDescription('vous invitons à lire les règles et à :')
     .addField('- vous présenter (optionnel)', 'introduce yourself (optional)', true)
     .addField('- vous définir politiquement (si vous n\'êtes pas politisé, précisez le quand même)', 'Define yourself politically (if you are not politicized, specify it anyway', true)
     .addField('- d\'où avez vous reçu votre invitation ?', 'Where did you receive your invitation from ?', true)
+    .setImage('attachment://block.jpg')
     .setFooter('Quelqu\'un va passer pour te faire rentrer sur le serveur');
+  embed.files = [{
+    attachment: './static/img/block.jpg',
+    name: 'block.jpg',
+  }];
   member.guild.channels.get(lobbyIdChannel).send({ embed });
-  member.guild.channels.get(lobbyIdChannel).send('', new Attachment('./static/img/block.jpg', 'block.jpg'));
 });
 
 client.login(token);
