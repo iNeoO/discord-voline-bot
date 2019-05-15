@@ -82,4 +82,10 @@ client.on('guildMemberAdd', member => {
   member.guild.channels.get(lobbyIdChannel).send({ embed });
 });
 
+client.on('error', (e) => {
+  console.error('____');
+  console.error((new Date()).toISOString());
+  console.error(e);
+});
+
 client.login(token);

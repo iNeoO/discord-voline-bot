@@ -14,10 +14,12 @@ module.exports = (msg, user) => {
   const roles = [moderatorIdRole, actifIdRole];
   isAuthorized(author, roles).then((err) => {
     if (!err) {
-      const memberRole = msg.guild.roles.get(memberIdRole);
-      const mediationRole = msg.guild.roles.get(mediationIdRole);
-      user.removeRole(mediationRole).catch(console.error);
-      user.addRole(memberRole).catch(console.error);
+      setTimeout(() => {
+        const memberRole = msg.guild.roles.get(memberIdRole);
+        const mediationRole = msg.guild.roles.get(mediationIdRole);
+        user.removeRole(mediationRole).catch(console.error);
+        user.addRole(memberRole).catch(console.error);
+      }, 3000);
       return msg.channel.send(`<@${user.id}> has been promote member.`,
         new Discord.Attachment('./static/img/welcome-in.jpg', 'welcome-in.jpg'));
     } else {

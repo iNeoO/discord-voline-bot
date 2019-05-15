@@ -16,12 +16,12 @@
 ### Administration
  - !clear : Clean message in a channel (need to be moderator)
  - !infos <@someone> : Get some info on someone
+ - !kick <@someone> : Kick someone from the Discord (need to be moderator)
  - !mediation <@someone> : Remove all roles an give "en Médiation" role (need to be actif or moderator)
  - !poll <question> : Create a poll with pos/neg/abs (need to be moderator or actif)
  - !polls <question> -- rep 1 -- rep2 -- rep3 ... : Create a poll multiple answers (need to be moderator or actif)
  - !promote actif <@someone> : Give rights to someone (need to be moderator)
  - !promote member <@someone> : Give rights to someone (need to be moderator or actif)
- - !kick <@someone> : Kick someone from the Discord (need to be moderator)
 
 ### Fun
 - !clivage <text> : Answer with sé de drouate or sé de gôche
@@ -34,7 +34,6 @@
 - !asi <url> : get link of an emission or the pdf of an article
 - !diplo <url> : convert monde-diplomatique article to pdf
 - !mediapart <url> : convert mediapart article to pdf
-- !propagande : Display propagande image
 - !rss : Check for news on rss
 
 ### Vocal
