@@ -30,7 +30,7 @@ class Hs extends Command {
   run(msg, { url }) {
     (async () => {
       try {
-        const browser = await puppeteer.launch({ headless: false });
+        const browser = await puppeteer.launch();
         const page = await browser.newPage({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         await page.goto('https://www.hors-serie.net/connexion.php');
         await page.waitFor('#contact_form', { visible: true });
