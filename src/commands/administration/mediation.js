@@ -5,7 +5,6 @@ const {
   mediationIdRole,
   moderatorIdRole,
   memberIdRole,
-  actifIdRole,
 } = require('@/config.js');
 const {
   isAuthorized,
@@ -20,7 +19,7 @@ class Mediation extends Command {
       name: 'mediation',
       group: 'administration',
       memberName: 'mediation',
-      description: 'Set an user in mediation (need to be moderator or actif)',
+      description: 'Set an user in mediation (need to be moderator or member)',
       examples: [helper],
       args: [
         {
@@ -33,26 +32,24 @@ class Mediation extends Command {
   }
 
   run(msg, { user }) {
-    const roles = [moderatorIdRole, actifIdRole];
+    const roles = [moderatorIdRole, memberIdRole];
     const author = msg.member;
     isAuthorized(author, roles).then((err) => {
       if (!err) {
-        const guardRoles = [
-          moderatorIdRole,
-        ];
-        const memberRole = msg.guild.roles.get(memberIdRole);
         const mediationRole = msg.guild.roles.get(mediationIdRole);
-        const actifRole = msg.guild.roles.get(actifIdRole);
         const target = msg.guild.member(user);
-        isTargetAble(target, guardRoles).then((err) => {
+        isTargetAble(target).then((err) => {
           if (!err) {
-            target.removeRole(memberRole).catch(console.error);
-            target.removeRole(actifRole).catch(console.error);
-            target.addRole(mediationRole).catch(console.error);
-            const reponse = `<@${user.id}> has been set in mediation.`;
-            msg.channel.send(reponse);
-          } else {
-            msg.reply(`**<@${user.id}> can't be set in mediation.**`);
+            const hasRole = roles.find((role) => target.roles.has(role));
+            if (hasRole) {
+              target.removeRole(mediationRole).catch(console.error);
+              const reponse = `mediation role removed for <@${user.id}>`;
+              msg.channel.send(reponse);
+            } else {
+              target.addRole(mediationRole).catch(console.error);
+              const reponse = `mediation role added for <@${user.id}>`;
+              msg.channel.send(reponse);
+            }
           }
         }).catch((e) => {
           console.error(e);

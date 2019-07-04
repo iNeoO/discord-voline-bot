@@ -57,6 +57,7 @@ class Asi extends Command {
           return null;
         });
         if (files) {
+          await browser.close();
           return msg.reply(`\n- mp3: ${files.mp3}\n- video: ${files.video}`);
         } else {
           await page.pdf({ path: './pdf/asi.pdf', format: 'A4' });

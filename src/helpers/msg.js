@@ -1,8 +1,8 @@
 const media = [
-  '- !asi <url> : get link of an emission or the pdf of an article',
+  '- !asi <url> : get links of an emission or the pdf of an article',
   '- !diplo <url> : convert monde-diplomatique article to pdf',
+  '- !hs <url> : get links of an emission',
   '- !mediapart <url> : convert mediapart article to pdf',
-  '- !propagande : Display propagande image',
   '- !rss : Check for news on rss',
 ];
 
@@ -33,11 +33,11 @@ const fun = [
 const administration = [
   '- !clear : Clean message in a channel (need to be moderator)',
   '- !infos <@someone> : Get some info on someone',
-  '- !mediation <@someone> : Remove all roles an give "en Médiation" role (need to be actif or moderator)',
-  '- !poll <question> : Create a poll with pos/neg/abs (need to be moderator or actif)',
-  '- !polls <question> -- rep 1 -- rep2 -- rep3 ... : Create a poll multiple answers (need to be moderator or actif)',
-  '- !promote actif <@someone> : Give rights to someone (need to be moderator)',
-  '- !promote member <@someone> : Give rights to someone (need to be moderator or actif)',
+  '- !mediation <@someone> : Remove all roles an give "en Médiation" role (need to be member or moderator)',
+  '- !poll <question> : Create a poll with pos/neg/abs (need to be member or moderator)',
+  '- !polls <question> -- rep 1 -- rep2 -- rep3 ... : Create a poll multiple answers (need to be member or moderator)',
+  '- !promote member <@someone> : Give rights to someone (need to be moderator)',
+  '- !promote user <@someone> : Give rights to someone (need to be member or moderator)',
   '- !kick <@someone> : Kick someone from the Discord (need to be moderator)',
 ];
 

@@ -6,8 +6,8 @@ module.exports = {
   ownder: '', // Owner id
   adminIds: [], // Id's list of Admins
   moderatorIdRole: '', // Id of moderator role
+  userIdRole: '', // Id of member role
   memberIdRole: '', // Id of member role
-  actifIdRole: '', // Id of member role
   mediationIdRole: '', // Id for mediation role
   voteIdChannel: '', // Vote Id channel where post poll
   lobbyIdChannel: '', // Lobby id chanel for welcome message

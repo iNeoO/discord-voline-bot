@@ -10,6 +10,7 @@ const {
 } = require('@helpers/permission.js');
 const {
   moderatorIdRole,
+  memberIdRole,
 } = require('@/config.js');
 
 
@@ -19,7 +20,7 @@ class Kick extends Command {
       name: 'kick',
       group: 'administration',
       memberName: 'kick',
-      description: 'Kick an user (need to be moderator)',
+      description: 'Kick an user (need to be moderator or member)',
       examples: ['!kick <@user>'],
       args: [
         {
@@ -34,11 +35,13 @@ class Kick extends Command {
   run(msg, { user }) {
     const roles = [
       moderatorIdRole,
+      memberIdRole,
     ];
     const author = msg.member;
     isAuthorized(author, roles).then((err) => {
       const guardRoles = [
         moderatorIdRole,
+        memberIdRole,
       ];
       if (!err) {
         const target = msg.guild.member(user);

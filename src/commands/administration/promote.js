@@ -1,11 +1,11 @@
 const {
   Command,
 } = require('discord.js-commando');
+const promoteUser = require('./promote/user.js');
 const promoteMember = require('./promote/member.js');
-const promoteActif = require('./promote/actif.js');
 
 
-const helper = '!promote <actif|member> <@user>';
+const helper = '!promote <user|member> <@user>';
 
 
 class Promote extends Command {
@@ -14,12 +14,12 @@ class Promote extends Command {
       name: 'promote',
       group: 'administration',
       memberName: 'promote',
-      description: 'Promote an user (need to be moderator or actif for member and moderator for actif)',
+      description: 'Promote an user (need to be moderator or member for user and moderator for member)',
       examples: [helper],
       args: [
         {
           key: 'role',
-          prompt: '**Which role do you want to use (member|actif) ?**',
+          prompt: '**Which role do you want to use (user|member) ?**',
           type: 'string',
         },
         {
@@ -33,8 +33,8 @@ class Promote extends Command {
 
   run(msg, { role, user }) {
     const params = {
+      user: promoteUser,
       member: promoteMember,
-      actif: promoteActif,
     };
     if (role === 'help' || role === 'h') {
       msg.reply(helper);

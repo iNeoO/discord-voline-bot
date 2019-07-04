@@ -5,7 +5,7 @@ const {
 const {
   voteIdChannel,
   moderatorIdRole,
-  actifIdRole,
+  memberIdRole,
 } = require('@/config.js');
 const {
   isAuthorized,
@@ -24,7 +24,7 @@ class Poll extends Command {
       name: 'poll',
       group: 'administration',
       memberName: 'poll',
-      description: 'Create a poll with yes/no/neutral (need to be moderator or actif)',
+      description: 'Create a poll with yes/no/neutral (need to be moderator or member)',
       examples: [helper],
       args: [
         {
@@ -37,7 +37,7 @@ class Poll extends Command {
   }
 
   run(msg, { question }) {
-    const roles = [moderatorIdRole, actifIdRole];
+    const roles = [moderatorIdRole, memberIdRole];
     const { member } = msg;
     isAuthorized(member, roles).then((err) => {
       if (!err) {

@@ -1,3 +1,4 @@
+const Discord = require('discord.js');
 const {
   isAuthorized,
 } = require('@helpers/permission.js');
@@ -9,14 +10,15 @@ const {
 
 module.exports = (msg, user) => {
   const author = msg.member;
-  const roles = [moderatorIdRole];
+  const roles = [moderatorIdRole, memberIdRole];
   isAuthorized(author, roles).then((err) => {
     if (!err) {
-      const userRole = msg.guild.roles.get(userIdRole);
-      const memberRole = msg.guild.roles.get(memberIdRole);
-      user.addRole(userRole).catch(console.error);
-      user.addRole(memberRole).catch(console.error);
-      return msg.channel.send(`<@${user.id}> has been promote member.`);
+      setTimeout(() => {
+        const memberRole = msg.guild.roles.get(userIdRole);
+        user.addRole(memberRole).catch(console.error);
+      }, 3000);
+      return msg.channel.send(`<@${user.id}> has been promote member.`,
+        new Discord.Attachment('./static/img/welcome-in.jpg', 'welcome-in.jpg'));
     } else {
       msg.reply('you are not allowed to promote anybody.');
     }

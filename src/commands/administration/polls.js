@@ -5,7 +5,7 @@ const {
 const {
   voteIdChannel,
   moderatorIdRole,
-  actifIdRole,
+  memberIdRole,
 } = require('@/config.js');
 const {
   isAuthorized,
@@ -23,7 +23,7 @@ class Polls extends Command {
       name: 'polls',
       group: 'administration',
       memberName: 'polls',
-      description: 'Create a poll with multiple reponse (need to be moderator or actif)',
+      description: 'Create a poll with multiple reponse (need to be moderator or member)',
       examples: [helper],
       argsType: 'single',
       args: [
@@ -38,7 +38,7 @@ class Polls extends Command {
   }
 
   run(msg, { polls }) {
-    const roles = [moderatorIdRole, actifIdRole];
+    const roles = [moderatorIdRole, memberIdRole];
     const { member } = msg;
     isAuthorized(member, roles).then((err) => {
       if (!err) {
