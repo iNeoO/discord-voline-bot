@@ -1,0 +1,4 @@
+module.export = {
+  readOnly: {},
+  ban: {},
+};

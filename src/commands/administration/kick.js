@@ -12,6 +12,7 @@ const {
   moderatorIdRole,
   memberIdRole,
 } = require('@/config.js');
+const Jimp = require('jimp');
 
 
 class Kick extends Command {
@@ -45,14 +46,20 @@ class Kick extends Command {
       ];
       if (!err) {
         const target = msg.guild.member(user);
-        isTargetAble(target, guardRoles).then((err) => {
+        isTargetAble(target, guardRoles).then(async (err) => {
           if (!err) {
             setTimeout(() => {
               target.kick();
               return msg.reply(`<@${target.id}> has been kicked !`);
             }, 5000);
-            msg.channel.send(`<@${target.id}>`,
-              new Attachment('../static/img/block.jpg', 'block.jpg'));
+            const background = await Jimp.read('./static/img/entry_denied.png');
+            const avatar = await Jimp.read(user.avatarURL);
+            avatar.resize(70, 70);
+            const font = await Jimp.loadFont(Jimp.FONT_SANS_14_BLACK);
+            const image = await background.composite(avatar, 130, 180)
+              .print(font, 15, 155, user.username)
+              .getBufferAsync(Jimp.MIME_PNG);
+            return msg.channel.send(`<@${user.id}> has been denied`, new Attachment(image));
           } else {
             msg.reply('This user can\'t be kicked.');
           }

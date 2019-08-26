@@ -4,6 +4,7 @@ const {
   RichEmbed,
 } = require('discord.js');
 const Commando = require('discord.js-commando');
+const Jimp = require('jimp');
 const {
   id,
   owner,
@@ -63,8 +64,12 @@ client.on('message', message => {
   }
 });
 
-client.on('guildMemberAdd', member => {
+client.on('guildMemberAdd', async member => {
   const { user } = member;
+  const background = await Jimp.read('./static/img/entry.png');
+  const avatar = await Jimp.read(user.avatarURL);
+  avatar.resize(175, 175);
+  const image = await background.composite(avatar, 90, 245).getBufferAsync(Jimp.MIME_PNG);
   const embed = new RichEmbed()
     .setColor('RANDOM')
     .setThumbnail(user.avatarURL)
@@ -73,11 +78,11 @@ client.on('guildMemberAdd', member => {
     .addField('- vous présenter (optionnel)', 'introduce yourself (optional)', true)
     .addField('- vous définir politiquement (si vous n\'êtes pas politisé, précisez le quand même)', 'Define yourself politically (if you are not politicized, specify it anyway', true)
     .addField('- d\'où avez vous reçu votre invitation ?', 'Where did you receive your invitation from ?', true)
-    .setImage('attachment://block.jpg')
-    .setFooter('Quelqu\'un va passer pour te faire rentrer sur le serveur');
+    .setImage('attachment://entry.png')
+    .setFooter('Quelqu\'un va passer pour te faire rentrer sur le serveur.');
   embed.files = [{
-    attachment: './static/img/block.jpg',
-    name: 'block.jpg',
+    attachment: image,
+    name: 'entry.png',
   }];
   member.guild.channels.get(lobbyIdChannel).send({ embed });
 });

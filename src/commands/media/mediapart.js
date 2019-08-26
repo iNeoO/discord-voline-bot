@@ -52,13 +52,10 @@ class Mediapart extends Command {
           await fullPage.click();
           await page.waitForNavigation();
         }
-        await page.pdf({ path: './pdf/mediapart.pdf', format: 'A4' });
+        const pdf = await page.pdf();
         await browser.close();
         return msg.reply('your file : ',
-          new Attachment('./pdf/mediapart.pdf', './pdf/mediapart.pdf'),
-        ).then(() => {
-          fs.unlinkSync('./pdf/mediapart.pdf');
-        });
+          new Attachment(pdf, 'mediapart.pdf'));
       } catch (e) {
         console.error('____');
         console.error((new Date()).toISOString());

@@ -60,13 +60,10 @@ class Asi extends Command {
           await browser.close();
           return msg.reply(`\n- mp3: ${files.mp3}\n- video: ${files.video}`);
         } else {
-          await page.pdf({ path: './pdf/asi.pdf', format: 'A4' });
+          const pdf = await page.pdf();
           await browser.close();
           return msg.reply('your file : ',
-            new Attachment('./pdf/asi.pdf', './pdf/asi.pdf'),
-          ).then(() => {
-            fs.unlinkSync('./pdf/asi.pdf');
-          });
+            new Attachment(pdf, 'asi.pdf'));
         }
       } catch (e) {
         console.error('____');

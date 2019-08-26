@@ -9,30 +9,34 @@ const {
 } = require('@/config.js');
 
 
-class Clear extends Command {
+class ClearOld extends Command {
   constructor(client) {
     super(client, {
-      name: 'clear',
+      name: 'clearold',
       group: 'administration',
-      memberName: 'clear',
-      description: 'Clean message in a channel (need to be moderator)',
-      examples: ['!clear'],
+      memberName: 'clearold',
+      description: 'Clean one by one all message in a channel (need to be moderator)',
+      examples: ['!clearold'],
     });
   }
 
   run(msg) {
     const roles = [moderatorIdRole];
-    const { member } = msg;
+    const {
+      member,
+    } = msg;
     isAuthorized(member, roles).then((err) => {
       if (!err) {
-        if (msg.channel.type == 'text') {
-          msg.channel.fetchMessages().then(messages => {
-            msg.channel.bulkDelete(messages);
-          }).catch(err => {
-            msg.channel.send('Error while doing Bulk Delete');
-            msg.channel.send(`\`\`\`${err}\`\`\``);
+        msg.channel.fetchMessages({
+          limit: 50,
+        }).then((msgCollection) => {
+          msgCollection.forEach((message) => {
+            message.delete();
           });
-        }
+        }).catch((e) => {
+          console.error(e);
+          msg.reply('Something went wrong');
+        });
       } else {
         msg.reply('**You don\'t have rights to execute this command**');
       }
@@ -43,4 +47,4 @@ class Clear extends Command {
   }
 }
 
-module.exports = Clear;
+module.exports = ClearOld;

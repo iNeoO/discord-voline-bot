@@ -2,16 +2,17 @@ const {
   Command,
 } = require('discord.js-commando');
 const {
-  mediationIdRole,
   moderatorIdRole,
   memberIdRole,
 } = require('@/config.js');
 const {
   isAuthorized,
-  isTargetAble,
 } = require('@helpers/permission.js');
+const mediationIsolation = require('./mediation/isolation');
+const mediationMute = require('./mediation/mute');
+const mediationSimple = require('./mediation/simple');
 
-const helper = '**```!mediation <@user>```**';
+const helper = '**```!mediation <ban|isolation|mute|readonly|simple> <@user>```**';
 
 class Mediation extends Command {
   constructor(client) {
@@ -23,38 +24,40 @@ class Mediation extends Command {
       examples: [helper],
       args: [
         {
+          key: 'role',
+          prompt: '**Which mediation do you want to use (user|member) ?**',
+          type: 'string',
+        },
+        {
           key: 'user',
-          prompt: '**Which user do you want to put in mediation (@user) ?**',
+          prompt: '**Which user do you want to set in mediation (@user) ?**',
           type: 'user',
         },
       ],
     });
   }
 
-  run(msg, { user }) {
+  run(msg, { role, user }) {
     const roles = [moderatorIdRole, memberIdRole];
     const author = msg.member;
     isAuthorized(author, roles).then((err) => {
       if (!err) {
-        const mediationRole = msg.guild.roles.get(mediationIdRole);
-        const target = msg.guild.member(user);
-        isTargetAble(target).then((err) => {
-          if (!err) {
-            const hasRole = roles.find((role) => target.roles.has(role));
-            if (hasRole) {
-              target.removeRole(mediationRole).catch(console.error);
-              const reponse = `mediation role removed for <@${user.id}>`;
-              msg.channel.send(reponse);
-            } else {
-              target.addRole(mediationRole).catch(console.error);
-              const reponse = `mediation role added for <@${user.id}>`;
-              msg.channel.send(reponse);
-            }
-          }
-        }).catch((e) => {
-          console.error(e);
-          msg.reply('Something went wrong');
-        });
+        const params = {
+          isolation: mediationIsolation,
+          mute: mediationMute,
+          simple: mediationSimple,
+        };
+        if (role === 'help' || role === 'h') {
+          msg.reply(helper);
+        }
+        const paramsKeys = Object.keys(params);
+        const member = msg.guild.member(user);
+        const commandKey = paramsKeys.find(key => key === role);
+        if (commandKey) {
+          params[commandKey](msg, member);
+        } else {
+          msg.reply(helper);
+        }
       } else {
         msg.reply('**You are not allowed to set anybody in mediation.**');
       }

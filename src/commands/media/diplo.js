@@ -49,11 +49,10 @@ class Diplo extends Command {
         await page.waitFor(5000);
         await page.pdf({ path: './pdf/diplo.pdf', format: 'A4' });
         await browser.close();
+        const pdf = await page.pdf();
+        await browser.close();
         return msg.reply('your file : ',
-          new Attachment('./pdf/diplo.pdf', './pdf/diplo.pdf'),
-        ).then(() => {
-          fs.unlinkSync('./pdf/diplo.pdf');
-        });
+          new Attachment(pdf, 'diplo.pdf'));
       } catch (e) {
         console.error('____');
         console.error((new Date()).toISOString());

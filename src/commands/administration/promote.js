@@ -5,7 +5,7 @@ const promoteUser = require('./promote/user.js');
 const promoteMember = require('./promote/member.js');
 
 
-const helper = '!promote <user|member> <@user>';
+const helper = '**```!promote <user|member> <@user>```**';
 
 
 class Promote extends Command {
