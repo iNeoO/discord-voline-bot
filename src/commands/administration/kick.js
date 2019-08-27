@@ -55,9 +55,9 @@ class Kick extends Command {
             const background = await Jimp.read('./static/img/entry_denied.png');
             const avatar = await Jimp.read(user.avatarURL);
             avatar.resize(70, 70);
-            const font = await Jimp.loadFont(Jimp.FONT_SANS_14_BLACK);
+            const font = await Jimp.loadFont('./static/font/04b_03-16-2.fnt');
             const image = await background.composite(avatar, 130, 180)
-              .print(font, 15, 155, user.username)
+              .print(font, 15, 157, user.username)
               .getBufferAsync(Jimp.MIME_PNG);
             return msg.channel.send(`<@${user.id}> has been denied`, new Attachment(image));
           } else {

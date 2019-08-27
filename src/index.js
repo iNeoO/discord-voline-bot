@@ -12,6 +12,7 @@ const {
   token,
   newsIdChannel,
   lobbyIdChannel,
+  conversationIdChannel,
 } = require('@/config.js');
 const {
   quotes,
@@ -58,9 +59,26 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-  if (message.content.startsWith(`<@${id}>`) && !message.author.bot) {
+  if (message.content.startsWith(`<@${id}>`)
+    && !message.author.bot
+    && message.channel.type !== 'dm') {
     const random = Math.floor((Math.random() * quotes.length));
     message.reply(` ${quotes[random]}`);
+    return;
+  }
+  if (message.channel.type === 'dm' && !message.author.bot) {
+    const content = message.content.split(' ');
+    if (content && content[0]) {
+      const command = message.content.startsWith(client.commandPrefix)
+        ? content[0].substring(0, client.commandPrefix.length)
+        : content[0];
+      const commands = client.registry.commands.map(({ name }) => name);
+      if (commands.includes(command)) {
+        return;
+      }
+      client.channels.get(conversationIdChannel).send(`${message.author.username} : ${message.content}`);
+    }
+    return;
   }
 });
 

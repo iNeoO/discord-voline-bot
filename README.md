@@ -4,6 +4,7 @@
  - axios
  - discord.js
  - discord.js-commando
+ - jimp
  - module-alias
  - node-opus
  - puppeteer
@@ -17,11 +18,14 @@
  - !clear : Clean message in a channel (need to be moderator)
  - !infos <@someone> : Get some info on someone
  - !kick <@someone> : Kick someone from the Discord (need to be moderator)
- - !mediation <@someone> : Remove all roles an give "en Médiation" role (need to be member or moderator)
+ - !anwer <@someone> : Send DM to someone (need to be in a specific channel and be member or moderator)
+ - !mediation isolation|mute|simple <@someone> : Give/remove "isolation|mute|en mediation" role (need to be member or moderator)
  - !poll <question> : Create a poll with pos/neg/abs (need to be moderator or member)
  - !polls <question> -- rep 1 -- rep2 -- rep3 ... : Create a poll multiple answers (need to be moderator or member)
  - !promote member <@someone> : Give rights to someone (need to be moderator)
  - !promote user <@someone> : Give rights to someone (need to be moderator or member)
+ - !readonly <@someone> <nbDays> : Remove all roles an give readonly role a specific nb of days (need to be moderator or member)
+ - !ban <@someone> <nbDays> : Remove all roles an give ban role a specific nb of days (need to be moderator or member)
 
 ### Fun
 - !clivage <text> : Answer with sé de drouate or sé de gôche
