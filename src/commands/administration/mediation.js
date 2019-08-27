@@ -25,7 +25,7 @@ class Mediation extends Command {
       args: [
         {
           key: 'role',
-          prompt: '**Which mediation do you want to use (user|member) ?**',
+          prompt: '**Which mediation do you want to use (isolation|mute|simple) ?**',
           type: 'string',
         },
         {
