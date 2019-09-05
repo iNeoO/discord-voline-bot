@@ -19,7 +19,7 @@ module.exports = (msg, member) => {
         member.addRole(memberRole).catch(console.error);
       }, 4000);
       const background = await Jimp.read('./static/img/entry_valided.png');
-      const avatar = await new Jimp.read(member.user.avatarURL);
+      const avatar = await new Jimp.read(member.user.avatarURL || './static/img/avatar-discord.jpg');
       avatar.resize(70, 70);
       const font = await Jimp.loadFont('./static/font/04b_03-16-2.fnt');
       const image = await background.composite(avatar, 130, 180)

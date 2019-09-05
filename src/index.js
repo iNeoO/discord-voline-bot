@@ -86,7 +86,7 @@ client.on('message', message => {
 client.on('guildMemberAdd', async member => {
   const { user } = member;
   const background = await Jimp.read('./static/img/entry.png');
-  const avatar = await Jimp.read(user.avatarURL);
+  const avatar = await Jimp.read(user.avatarURL || './static/img/avatar-discord.jpg');
   avatar.resize(175, 175);
   const image = await background.composite(avatar, 90, 245).getBufferAsync(Jimp.MIME_PNG);
   const embed = new RichEmbed()

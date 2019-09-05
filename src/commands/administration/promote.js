@@ -31,7 +31,7 @@ class Promote extends Command {
     });
   }
 
-  run(msg, { role, user }) {
+  run(msg, { role }) {
     const params = {
       user: promoteUser,
       member: promoteMember,
@@ -40,7 +40,7 @@ class Promote extends Command {
       msg.reply(helper);
     }
     const paramsKeys = Object.keys(params);
-    const member = msg.guild.member(user);
+    const member = msg.mentions.members.first();
     const commandKey = paramsKeys.find(key => key === role);
     if (commandKey) {
       params[commandKey](msg, member);

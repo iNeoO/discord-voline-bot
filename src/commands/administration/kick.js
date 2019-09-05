@@ -45,7 +45,7 @@ class Kick extends Command {
         memberIdRole,
       ];
       if (!err) {
-        const target = msg.guild.member(user);
+        const target = msg.mentions.members.first();
         isTargetAble(target, guardRoles).then(async (err) => {
           if (!err) {
             setTimeout(() => {
@@ -53,7 +53,7 @@ class Kick extends Command {
               return msg.reply(`<@${target.id}> has been kicked !`);
             }, 5000);
             const background = await Jimp.read('./static/img/entry_denied.png');
-            const avatar = await Jimp.read(user.avatarURL);
+            const avatar = await Jimp.read(user.avatarURL || './static/img/avatar-discord.jpg');
             avatar.resize(70, 70);
             const font = await Jimp.loadFont('./static/font/04b_03-16-2.fnt');
             const image = await background.composite(avatar, 130, 180)

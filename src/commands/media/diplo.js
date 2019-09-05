@@ -47,8 +47,6 @@ class Diplo extends Command {
         await page.type('input[name="mot_de_passe"]', password);
         await page.$eval('#identification_sso', form => form.submit());
         await page.waitFor(5000);
-        await page.pdf({ path: './pdf/diplo.pdf', format: 'A4' });
-        await browser.close();
         const pdf = await page.pdf();
         await browser.close();
         return msg.reply('your file : ',

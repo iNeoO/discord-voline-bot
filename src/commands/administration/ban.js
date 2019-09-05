@@ -49,7 +49,7 @@ class Ban extends Command {
         memberIdRole,
       ];
       if (!err) {
-        const target = msg.guild.member(user);
+        const target = msg.mentions.members.first();
         isTargetAble(target, guardRoles).then((err) => {
           if (!err) {
             const banRole = msg.guild.roles.get(banIdRole);

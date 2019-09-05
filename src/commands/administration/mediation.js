@@ -37,7 +37,7 @@ class Mediation extends Command {
     });
   }
 
-  run(msg, { role, user }) {
+  run(msg, { role }) {
     const roles = [moderatorIdRole, memberIdRole];
     const author = msg.member;
     isAuthorized(author, roles).then((err) => {
@@ -51,7 +51,7 @@ class Mediation extends Command {
           msg.reply(helper);
         }
         const paramsKeys = Object.keys(params);
-        const member = msg.guild.member(user);
+        const member = msg.mentions.members.first();
         const commandKey = paramsKeys.find(key => key === role);
         if (commandKey) {
           params[commandKey](msg, member);
