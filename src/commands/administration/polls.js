@@ -43,7 +43,7 @@ class Polls extends Command {
     isAuthorized(member, roles).then((err) => {
       if (!err) {
         const choiceArray = polls.split('--');
-        const question = choiceArray.pop();
+        const question = choiceArray.shift();
         if (choiceArray.length <= 2) {
           return msg.reply(`**You need to have at least 3 choices**\n${helper}`);
         }
