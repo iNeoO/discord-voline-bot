@@ -2,6 +2,9 @@ const { Attachment } = require('discord.js');
 const {
   Command,
 } = require('discord.js-commando');
+const {
+  RichEmbed,
+} = require('discord.js');
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const {
@@ -32,6 +35,14 @@ class Mediapart extends Command {
   run(msg, { url }) {
     (async () => {
       try {
+        const patt = /(?:[^\/]*\/)*([^\/]*)/;
+        const fileName = `mediapart-${url.match(patt)[1]}.pdf`;
+        const embed = new RichEmbed()
+          .setTitle(`Mediapart to PDF`)
+          .setDescription(`Converting ${url} to PDF.`)
+          .setFooter('Please wait ...')
+        msg.channel.send({ embed });
+
         const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         const page = await browser.newPage();
         await page.goto(url);
@@ -55,7 +66,7 @@ class Mediapart extends Command {
         const pdf = await page.pdf();
         await browser.close();
         return msg.reply('your file : ',
-          new Attachment(pdf, 'mediapart.pdf'));
+          new Attachment(pdf, fileName));
       } catch (e) {
         console.error('____');
         console.error((new Date()).toISOString());
