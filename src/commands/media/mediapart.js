@@ -35,8 +35,8 @@ class Mediapart extends Command {
   run(msg, { url }) {
     (async () => {
       try {
-        var patt = /(?:[^\/]*\/)*([^\/]*)/;
-        var fileName = 'mediapart-' + url.match(patt)[1] + '.pdf';
+        const patt = /(?:[^\/]*\/)*([^\/]*)/;
+        const fileName = `mediapart-${url.match(patt)[1]}.pdf`;
         const embed = new RichEmbed()
           .setTitle(`Mediapart to PDF`)
           .setDescription(`Converting ${url} to PDF.`)
