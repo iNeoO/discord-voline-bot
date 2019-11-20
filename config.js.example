@@ -12,6 +12,7 @@ module.exports = {
   voteIdChannel: '', // Vote Id channel where post poll
   lobbyIdChannel: '', // Lobby id chanel for welcome message
   annoncesIdChannel: '', // Channel Id for logs
+  homeIdChannel: '', // Id where welcome are posted after promote user
   newsIdChannel: '', // Channel Id where news are post
   memeCdnNb: , // Number of meme on the cdn
   propagandeCdnNb: , // Number of propagande img on cdn

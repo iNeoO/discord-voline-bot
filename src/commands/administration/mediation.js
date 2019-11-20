@@ -12,7 +12,7 @@ const mediationIsolation = require('./mediation/isolation');
 const mediationMute = require('./mediation/mute');
 const mediationSimple = require('./mediation/simple');
 
-const helper = '**```!mediation <ban|isolation|mute|readonly|simple> <@user>```**';
+const helper = '**```!mediation <isolation|mute|simple> <@user>```**';
 
 class Mediation extends Command {
   constructor(client) {

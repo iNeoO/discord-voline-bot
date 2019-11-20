@@ -11,7 +11,10 @@ const playSong = (message, connection, songUrl) => {
   if (message.member.voiceChannel) {
     setters.setConnection(connection);
     const dispatcher = connection.playStream(ytdl(
-      songUrl, { filter: 'audioonly' }), {
+      songUrl, {
+        filter: 'audioonly',
+        highWaterMark: 1<<25,
+      }), {
       passes: 5,
     });
     dispatcher.on('end', reason => {

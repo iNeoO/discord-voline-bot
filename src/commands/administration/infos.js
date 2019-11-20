@@ -29,7 +29,11 @@ class Infos extends Command {
   run(msg, { user }) {
     const { author } = msg;
     const member = msg.guild.member(user);
-
+    if (!member) {
+      const response = `Can't get <@${user.id}> infos`;
+      msg.channel.send(response);
+      return;
+    }
     const embed = new RichEmbed()
       .setColor('RANDOM')
       .setThumbnail(user.avatarURL)

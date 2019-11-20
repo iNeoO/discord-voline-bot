@@ -50,7 +50,12 @@ client.on('ready', () => {
   setters.setDateUpdate(new Date());
 
   setInterval(async () => {
-    const articles = await getRss();
+    let articles;
+    try {
+      articles = await getRss();
+    } catch(e) {
+      console.error(`------------------\n${new Date()}\nSomething went wrong with news rss ${e}`);
+    }
     articles.forEach(text => {
       if (text.length) {
         client.channels.get(newsIdChannel).send(text);

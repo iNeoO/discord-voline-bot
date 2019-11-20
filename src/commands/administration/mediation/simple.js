@@ -5,7 +5,7 @@ const {
 module.exports = (msg, user) => {
   const mediationRole = msg.guild.roles.get(mediationSimpleIdRole);
   const target = msg.guild.member(user);
-  const hasRole = target.roles.has(mediationRole);
+  const hasRole = target.roles.has(mediationSimpleIdRole);
   if (hasRole) {
     target.removeRole(mediationRole).catch(console.error);
     const reponse = `mediation simple role removed for <@${user.id}>`;
