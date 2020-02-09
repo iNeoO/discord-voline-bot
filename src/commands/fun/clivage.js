@@ -37,7 +37,7 @@ class Clivage extends Command {
       .setTitle(`${question} ${answer}`)
       .setColor(color)
       .setImage(`${memeCdnUrl}${image}`)
-      .setFooter(`Rate asked by: ${msg.author.username}`, `${msg.author.avatarURL}`);
+      .setFooter(`Rate asked by: ${msg.author.username}`, `${msg.author.avatarURL || 'https://www.allo-image.net/stockimg/upload/7754021925bb4bd8d07bc9kisspng_computer_icons_discord_logo_smiley_emoticon_avatar_na_discord_5b4b6f179eb511.3695532315316702956501.jpg'}`);
     return msg.channel.send({ embed });
   }
 }
