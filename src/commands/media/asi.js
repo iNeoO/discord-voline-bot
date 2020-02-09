@@ -3,7 +3,9 @@ const {
   Command,
 } = require('discord.js-commando');
 const puppeteer = require('puppeteer');
-const fs = require('fs');
+const {
+  RichEmbed,
+} = require('discord.js');
 const {
   login,
   password,
@@ -32,6 +34,12 @@ class Asi extends Command {
   run(msg, { url }) {
     (async () => {
       try {
+        const embed = new RichEmbed()
+          .setTitle('Asi to PDF/mp3/video')
+          .setDescription(`Converting/getting ${url} to PDF/mp3/video.`)
+          .setFooter('Please wait ...');
+        msg.channel.send({ embed });
+
         const browser = await puppeteer.launch();
         const page = await browser.newPage({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         await page.goto(url);
@@ -63,7 +71,7 @@ class Asi extends Command {
           const pdf = await page.pdf();
           await browser.close();
           return msg.reply('your file : ',
-            new Attachment(pdf, 'asi.pdf'));
+            new Attachment(pdf, 'asi.pdf')).catch(e => msg.reply(e.message));
         }
       } catch (e) {
         console.error('____');

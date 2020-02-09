@@ -3,7 +3,9 @@ const {
   Command,
 } = require('discord.js-commando');
 const puppeteer = require('puppeteer');
-const fs = require('fs');
+const {
+  RichEmbed,
+} = require('discord.js');
 const {
   login,
   password,
@@ -35,6 +37,12 @@ class Diplo extends Command {
   run(msg, { url }) {
     (async () => {
       try {
+        const embed = new RichEmbed()
+          .setTitle('Diplo to PDF')
+          .setDescription(`Converting ${url} to PDF.`)
+          .setFooter('Please wait ...');
+        msg.channel.send({ embed });
+
         const browser = await puppeteer.launch({ headless: true });
         const page = await browser.newPage();
         // https://github.com/GoogleChrome/puppeteer/issues/665
@@ -50,7 +58,7 @@ class Diplo extends Command {
         const pdf = await page.pdf();
         await browser.close();
         return msg.reply('your file : ',
-          new Attachment(pdf, 'diplo.pdf'));
+          new Attachment(pdf, 'diplo.pdf')).catch(e => msg.reply(e.message));
       } catch (e) {
         console.error('____');
         console.error((new Date()).toISOString());

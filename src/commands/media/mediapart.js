@@ -6,7 +6,6 @@ const {
   RichEmbed,
 } = require('discord.js');
 const puppeteer = require('puppeteer');
-const fs = require('fs');
 const {
   login,
   password,
@@ -38,9 +37,9 @@ class Mediapart extends Command {
         const patt = /(?:[^\/]*\/)*([^\/]*)/;
         const fileName = `mediapart-${url.match(patt)[1]}.pdf`;
         const embed = new RichEmbed()
-          .setTitle(`Mediapart to PDF`)
+          .setTitle('Mediapart to PDF')
           .setDescription(`Converting ${url} to PDF.`)
-          .setFooter('Please wait ...')
+          .setFooter('Please wait ...');
         msg.channel.send({ embed });
 
         const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });

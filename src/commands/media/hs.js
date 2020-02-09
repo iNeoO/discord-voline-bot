@@ -3,6 +3,9 @@ const {
 } = require('discord.js-commando');
 const puppeteer = require('puppeteer');
 const {
+  RichEmbed,
+} = require('discord.js');
+const {
   login,
   password,
 } = require('@/config.js');
@@ -30,6 +33,12 @@ class Hs extends Command {
   run(msg, { url }) {
     (async () => {
       try {
+        const embed = new RichEmbed()
+          .setTitle('HS to mp3/video')
+          .setDescription(`Getting ${url} to mp3/video.`)
+          .setFooter('Please wait ...');
+        msg.channel.send({ embed });
+
         const browser = await puppeteer.launch();
         const page = await browser.newPage({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         await page.goto('https://www.hors-serie.net/connexion.php');
@@ -45,7 +54,6 @@ class Hs extends Command {
         await page.waitFor('.emi-infos', { visible: true });
         const files = await page.evaluate(() => {
           const infos = document.querySelectorAll('.emi-infos a');
-          console.log(infos);
           const video = infos[0];
           const mp3 = infos[1];
           if (mp3 && video) {
