@@ -23,7 +23,6 @@ const getRss = async () => {
         : new Date(item['dc:date']);
       return lastUpdate <= date && date <= new Date();
     }).map((item) => {
-      console.log(item);
       if (item.title) {
         let categories;
         if (item.category) {
