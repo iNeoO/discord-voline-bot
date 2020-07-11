@@ -19,14 +19,7 @@ module.exports = (msg, member) => {
         const memberRole = msg.guild.roles.get(userIdRole);
         member.addRole(memberRole).catch(console.error);
       }, 4000);
-      const background = await Jimp.read('./static/img/entry_valided.png');
-      const avatar = await new Jimp.read(member.user.avatarURL || './static/img/avatar-discord.jpg');
-      avatar.resize(70, 70);
-      const font = await Jimp.loadFont('./static/font/04b_03-16-2.fnt');
-      const image = await background.composite(avatar, 130, 180)
-        .print(font, 15, 157, member.user.username)
-        .getBufferAsync(Jimp.MIME_PNG);
-      return msg.guild.channels.get(homeIdChannel).send(`<@${member.id}> you have been promoted`, new Attachment(image));
+      return msg.guild.channels.get(homeIdChannel).send(`<@${member.id}> you have been promoted`);
     } else {
       msg.reply('you are not allowed to promote anybody.');
     }
