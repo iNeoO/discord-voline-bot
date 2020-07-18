@@ -11,18 +11,18 @@
   "author": "Valère Pique <pique.valere@gmx.fr>",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.19.2",
     "discord.js": "^11.5.1",
     "discord.js-commando": "^0.10.0",
-    "jimp": "^0.6.4",
-    "module-alias": "^2.2.0",
+    "jimp": "^0.14.0",
+    "module-alias": "^2.2.2",
     "node-opus": "^0.3.1",
-    "puppeteer": "^1.14.0",
-    "xml2json": "^0.11.2",
-    "ytdl-core": "^0.29.2"
+    "puppeteer": "^5.2.0",
+    "xml2json": "^0.12.0",
+    "ytdl-core": "^3.1.2"
   },
   "devDependencies": {
-    "eslint": "^5.0.1",
+    "eslint": "^7.4.0",
     "nodemon": "^1.18.10"
   },
   "_moduleAliases": {
