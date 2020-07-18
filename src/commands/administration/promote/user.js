@@ -7,6 +7,7 @@ const {
   userIdRole,
   memberIdRole,
   homeIdChannel,
+  sosDiscordUrl
 } = require('@/config.js');
 const Jimp = require('jimp');
 
@@ -26,7 +27,7 @@ module.exports = (msg, member) => {
       const image = await background.composite(avatar, 130, 180)
         .print(font, 15, 157, member.user.username)
         .getBufferAsync(Jimp.MIME_PNG);
-      return msg.guild.channels.get(homeIdChannel).send(`<@${member.id}> you have been promoted`, new Attachment(image));
+      return msg.guild.channels.get(homeIdChannel).send(`<@${member.id}> you have been promoted, Le discord de secours est : ${sosDiscordUrl}, (image come from a game, Papers, Please)`, new Attachment(image));
     } else {
       msg.reply('you are not allowed to promote anybody.');
     }
