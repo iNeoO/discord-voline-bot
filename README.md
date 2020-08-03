@@ -4,7 +4,6 @@
  - axios
  - discord.js
  - discord.js-commando
- - jimp
  - module-alias
  - node-opus
  - puppeteer

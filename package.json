@@ -14,7 +14,6 @@
     "axios": "^0.19.2",
     "discord.js": "^11.5.1",
     "discord.js-commando": "^0.10.0",
-    "jimp": "^0.14.0",
     "module-alias": "^2.2.2",
     "node-opus": "^0.3.1",
     "puppeteer": "^5.2.0",
@@ -22,7 +21,7 @@
     "ytdl-core": "^3.1.2"
   },
   "devDependencies": {
-    "eslint": "^7.4.0",
+    "eslint": "^7.6.0",
     "nodemon": "^1.18.10"
   },
   "_moduleAliases": {
