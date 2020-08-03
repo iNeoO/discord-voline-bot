@@ -16,7 +16,7 @@ const getRss = async () => {
       console.error(e);
       return '';
     }
-    const itemList = json.rss.channel.item;
+    const itemList = json.rss ? json.rss.channel.item : json.feed.entry;
     const items = itemList.filter((item) => {
       const date = item.pubDate
         ? new Date(item.pubDate)
