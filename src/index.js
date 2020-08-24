@@ -55,6 +55,9 @@ client.on('ready', () => {
     } catch(e) {
       console.error(`------------------\n${new Date()}\nSomething went wrong with news rss ${e}`);
     }
+    if (!articles) {
+      return;
+    }
     articles.forEach(text => {
       if (text.length) {
         client.channels.get(newsIdChannel).send(text);
