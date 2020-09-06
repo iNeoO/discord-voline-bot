@@ -7,10 +7,17 @@ const getRss = async () => {
   const lastUpdate = getters.getDateUpdate();
   const newDate = new Date();
   const articles = await Promise.all(rss.map(async ({ name, url }) => {
-    const { data } = await axios.get(url);
+    let data;
+    try {
+      data = await axios.get(url);
+    } catch(e) {
+      console.error(`\n\n${new Date()}: ${name}`);
+      console.error(e);
+      return ''
+    }
     let json = '';
     try {
-      json = parser.toJson(data.trim(), { object: true });
+      json = parser.toJson(( data.data ? data.data : data ).trim(), { object: true });
     } catch(e) {
       console.error(`\n\n${new Date()}: ${name}`);
       console.error(e);
@@ -46,7 +53,13 @@ const getRss = async () => {
       return '';
     }
     const articlesText = `\n\n___***${name}***___\n\n`;
-    return items.reduce((acc, art) => {
+    const uniqueItems = [];
+    for(const item of items) {
+      if (!uniqueItems.find((uniqItem) => uniqItem.name === item.name)) {
+        uniqueItems.push(item);
+      }
+    }
+    return uniqueItems.reduce((acc, art) => {
       let categories = '';
       if (art.categories) {
         categories = typeof art.categories === 'string'

@@ -67,10 +67,10 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-console.log(message.channel.type !== 'dm')
   if (message.content.startsWith(`<@!${id}>`)
     && !message.author.bot
-    && message.channel.type !== 'dm') {
+    && message.channel.type !== 'dm'
+    || message.content.includes(`<@!${id}>`)) {
     const random = Math.floor((Math.random() * quotes.length));
     message.reply(` ${quotes[random]}`);
     return;

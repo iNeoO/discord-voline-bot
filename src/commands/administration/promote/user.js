@@ -9,7 +9,6 @@ const {
   homeIdChannel,
   sosDiscordUrl
 } = require('@/config.js');
-const Jimp = require('jimp');
 
 module.exports = (msg, member) => {
   const author = msg.member;
