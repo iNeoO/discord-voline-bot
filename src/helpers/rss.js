@@ -25,10 +25,19 @@ const getRss = async () => {
     }
     const itemList = json.rss ? json.rss.channel.item : json.feed.entry;
     const items = itemList.filter((item) => {
-      const date = item.pubDate
-        ? new Date(item.pubDate)
-        : new Date(item['dc:date']);
-      return lastUpdate <= date && date <= new Date();
+      if (item.pubDate) {
+        const date = Date(item.pubDate);
+        return lastUpdate <= date && date <= new Date();
+      }
+      if (item['dc:date']) {
+        const date = new Date(item['dc:date']);
+        return lastUpdate <= date && date <= new Date();
+      }
+      if (item.published) {
+        const date = new Date(item.published);
+        return lastUpdate <= date && date <= new Date();
+      }
+      return false;
     }).map((item) => {
       if (item.title) {
         let categories;
@@ -55,7 +64,7 @@ const getRss = async () => {
     const articlesText = `\n\n___***${name}***___\n\n`;
     const uniqueItems = [];
     for(const item of items) {
-      if (!uniqueItems.find((uniqItem) => uniqItem.name === item.name)) {
+      if (!uniqueItems.find((uniqItem) => uniqItem.link === item.link)) {
         uniqueItems.push(item);
       }
     }
