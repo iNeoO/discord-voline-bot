@@ -42,16 +42,16 @@ class Hs extends Command {
         const browser = await puppeteer.launch();
         const page = await browser.newPage({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         await page.goto('https://www.hors-serie.net/connexion.php');
-        await page.waitFor('#contact_form', { visible: true });
+        await page.waitForSelector('#contact_form', { visible: true });
         await page.type('#contact_form input[name=mail]', login);
         await page.type('#contact_form input[name=pass]', password);
         const loginButton = await page.evaluateHandle(() => {
           return document.querySelector('#contact_form input[type=submit]');
         });
         await loginButton.click();
-        await page.waitFor(1000);
+        await page.waitForTimeout(1000);
         await page.goto(url);
-        await page.waitFor('.emi-infos', { visible: true });
+        await page.waitForSelector('.emi-infos', { visible: true });
         const files = await page.evaluate(() => {
           const infos = document.querySelectorAll('.emi-infos a');
           const video = infos[0];

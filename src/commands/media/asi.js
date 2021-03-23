@@ -43,19 +43,19 @@ class Asi extends Command {
         const browser = await puppeteer.launch();
         const page = await browser.newPage({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         await page.goto(url);
-        await page.waitFor('.login-menu-button', { visible: true });
+        await page.waitForSelector('.login-menu-button', { visible: true });
         const connection = await page.evaluateHandle(() => {
           return document.querySelector('.login-menu-button');
         });
         await connection.click();
-        await page.waitFor('login form site-field .field button[type="submit"]', { visible: true });
+        await page.waitForSelector('login form site-field .field button[type="submit"]', { visible: true });
         await page.type('#username', login);
         await page.type('#password', password);
         const loginButton = await page.evaluateHandle(() => {
           return document.querySelector('login form site-field .field button[type="submit"]');
         });
         await loginButton.click();
-        await page.waitFor(5000);
+        await page.waitForTimeout(5000);
         const files = await page.evaluate(() => {
           const mp3 = document.querySelector('.play-action');
           const video = document.querySelector('.download-action');

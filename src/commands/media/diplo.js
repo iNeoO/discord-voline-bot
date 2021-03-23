@@ -50,11 +50,11 @@ class Diplo extends Command {
         await page.goto(url);
         const button = await page.$('#session_connexion');
         await button.click();
-        await page.waitFor(1000);
+        await page.waitForTimeout(1000);
         await page.type('input[name="email"]', login);
         await page.type('input[name="mot_de_passe"]', password);
         await page.$eval('#identification_sso', form => form.submit());
-        await page.waitFor(5000);
+        await page.waitForTimeout(5000);
         const pdf = await page.pdf();
         await browser.close();
         return msg.reply('your file : ',
