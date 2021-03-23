@@ -47,7 +47,7 @@ class Mediapart extends Command {
         await page.goto(url);
         await page.type('#edit-name-content', login);
         await page.type('#edit-pass-content', password);
-        await page.waitFor('.l-50.login form input[type="submit"]', { visible: true });
+        await page.waitForSelector('.l-50.login form input[type="submit"]', { visible: true });
         const loginButton = await page.evaluateHandle(() => {
           const elem = document.querySelector('.l-50.login form input[type="submit"]');
           return elem;
