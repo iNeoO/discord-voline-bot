@@ -32,14 +32,13 @@ class Hs extends Command {
 
   run(msg, { url }) {
     (async () => {
+      const embed = new RichEmbed()
+        .setTitle('HS to mp3/video')
+        .setDescription(`Getting ${url} to mp3/video.`)
+        .setFooter('Please wait ...');
+      msg.channel.send({ embed });
+      const browser = await puppeteer.launch();
       try {
-        const embed = new RichEmbed()
-          .setTitle('HS to mp3/video')
-          .setDescription(`Getting ${url} to mp3/video.`)
-          .setFooter('Please wait ...');
-        msg.channel.send({ embed });
-
-        const browser = await puppeteer.launch();
         const page = await browser.newPage({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         await page.goto('https://www.hors-serie.net/connexion.php');
         await page.waitForSelector('#contact_form', { visible: true });
@@ -72,6 +71,8 @@ class Hs extends Command {
         console.error('____');
         console.error((new Date()).toISOString());
         console.error(e);
+      } finally {
+        browser.close();
       }
     })();
   }

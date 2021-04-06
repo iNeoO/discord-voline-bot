@@ -33,18 +33,23 @@ class Mediapart extends Command {
 
   run(msg, { url }) {
     (async () => {
+      const patt = /(?:[^\/]*\/)*([^\/]*)/;
+      const fileName = `mediapart-${url.match(patt)[1]}.pdf`;
+      const embed = new RichEmbed()
+        .setTitle('Mediapart to PDF')
+        .setDescription(`Converting ${url} to PDF.`)
+        .setFooter('Please wait ...');
+      msg.channel.send({ embed });
+      // const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
+      const browser = await puppeteer.launch({ args:['--window-size=1920,1080'] });
       try {
-        const patt = /(?:[^\/]*\/)*([^\/]*)/;
-        const fileName = `mediapart-${url.match(patt)[1]}.pdf`;
-        const embed = new RichEmbed()
-          .setTitle('Mediapart to PDF')
-          .setDescription(`Converting ${url} to PDF.`)
-          .setFooter('Please wait ...');
-        msg.channel.send({ embed });
-
-        const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         const page = await browser.newPage();
         await page.goto(url);
+        const rgpdButton = await page.evaluateHandle(() => {
+          const elem = document.querySelector('#js-cc-modal-allow');
+          return elem;
+        });
+        await rgpdButton.click();
         await page.type('#edit-name-content', login);
         await page.type('#edit-pass-content', password);
         await page.waitForSelector('.l-50.login form input[type="submit"]', { visible: true });
@@ -61,15 +66,17 @@ class Mediapart extends Command {
         if (fullPage && fullPage.click) {
           await fullPage.click();
           await page.waitForNavigation();
+          console.log('test3');
         }
         const pdf = await page.pdf();
-        await browser.close();
         return msg.reply('your file : ',
           new Attachment(pdf, fileName));
       } catch (e) {
         console.error('____');
         console.error((new Date()).toISOString());
         console.error(e);
+      } finally {
+        browser.close();
       }
     })();
   }

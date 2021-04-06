@@ -33,14 +33,14 @@ class Asi extends Command {
 
   run(msg, { url }) {
     (async () => {
-      try {
-        const embed = new RichEmbed()
-          .setTitle('Asi to PDF/mp3/video')
-          .setDescription(`Converting/getting ${url} to PDF/mp3/video.`)
-          .setFooter('Please wait ...');
-        msg.channel.send({ embed });
+      const embed = new RichEmbed()
+        .setTitle('Asi to PDF/mp3/video')
+        .setDescription(`Converting/getting ${url} to PDF/mp3/video.`)
+        .setFooter('Please wait ...');
+      msg.channel.send({ embed });
 
-        const browser = await puppeteer.launch();
+      const browser = await puppeteer.launch();
+      try {
         const page = await browser.newPage({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         await page.goto(url);
         await page.waitForSelector('.login-menu-button', { visible: true });
@@ -77,6 +77,8 @@ class Asi extends Command {
         console.error('____');
         console.error((new Date()).toISOString());
         console.error(e);
+      } finally {
+        await browser.close();
       }
     })();
   }

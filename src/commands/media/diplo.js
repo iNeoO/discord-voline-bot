@@ -36,14 +36,14 @@ class Diplo extends Command {
 
   run(msg, { url }) {
     (async () => {
-      try {
-        const embed = new RichEmbed()
-          .setTitle('Diplo to PDF')
-          .setDescription(`Converting ${url} to PDF.`)
-          .setFooter('Please wait ...');
-        msg.channel.send({ embed });
+      const embed = new RichEmbed()
+        .setTitle('Diplo to PDF')
+        .setDescription(`Converting ${url} to PDF.`)
+        .setFooter('Please wait ...');
+      msg.channel.send({ embed });
 
-        const browser = await puppeteer.launch({ headless: true });
+      const browser = await puppeteer.launch({ headless: true });
+      try {
         const page = await browser.newPage();
         // https://github.com/GoogleChrome/puppeteer/issues/665
         await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3738.0 Safari/537.36');
@@ -63,6 +63,8 @@ class Diplo extends Command {
         console.error('____');
         console.error((new Date()).toISOString());
         console.error(e);
+      } finally {
+        await browser.close();
       }
     })();
   }
