@@ -42,9 +42,9 @@ class Diplo extends Command {
         .setFooter('Please wait ...');
       msg.channel.send({ embed });
 
-      const browser = await puppeteer.launch({ headless: true });
+      const browser = await puppeteer.launch({ headless: true, args: ['--no-sandbox', '--disable-setuid-sandbox']});
       try {
-        const page = await browser.newPage();
+        const page = await browser.newPage({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         // https://github.com/GoogleChrome/puppeteer/issues/665
         await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3738.0 Safari/537.36');
         await page.goto(url);

@@ -41,9 +41,9 @@ class Mediapart extends Command {
         .setFooter('Please wait ...');
       msg.channel.send({ embed });
       // const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
-      const browser = await puppeteer.launch({ args:['--window-size=1920,1080'] });
+      const browser = await puppeteer.launch({ args:['--window-size=1920,1080', '--no-sandbox', '--disable-setuid-sandbox'] });
       try {
-        const page = await browser.newPage();
+        const page = await browser.newPage({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         await page.goto(url);
         const rgpdButton = await page.evaluateHandle(() => {
           const elem = document.querySelector('#js-cc-modal-allow');
@@ -52,9 +52,8 @@ class Mediapart extends Command {
         await rgpdButton.click();
         await page.type('#edit-name-content', login);
         await page.type('#edit-pass-content', password);
-        await page.waitForSelector('.l-50.login form input[type="submit"]', { visible: true });
         const loginButton = await page.evaluateHandle(() => {
-          const elem = document.querySelector('.l-50.login form input[type="submit"]');
+          const elem = document.querySelector('form .button.is-primary[type="submit"]');
           return elem;
         });
         await loginButton.click();
@@ -63,6 +62,11 @@ class Mediapart extends Command {
           const elem = document.querySelector('.content-page-full');
           return elem;
         });
+        const closeAlertBtn = await page.evaluateHandle(() => {
+          const elem = document.querySelector('.alert__button');
+          return elem;
+        });
+        await closeAlertBtn.click();
         if (fullPage && fullPage.click) {
           await fullPage.click();
           await page.waitForNavigation();

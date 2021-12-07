@@ -37,7 +37,7 @@ class Hs extends Command {
         .setDescription(`Getting ${url} to mp3/video.`)
         .setFooter('Please wait ...');
       msg.channel.send({ embed });
-      const browser = await puppeteer.launch();
+      const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
       try {
         const page = await browser.newPage({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         await page.goto('https://www.hors-serie.net/connexion.php');

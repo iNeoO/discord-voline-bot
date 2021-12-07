@@ -39,7 +39,7 @@ class Asi extends Command {
         .setFooter('Please wait ...');
       msg.channel.send({ embed });
 
-      const browser = await puppeteer.launch();
+      const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
       try {
         const page = await browser.newPage({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
         await page.goto(url);
