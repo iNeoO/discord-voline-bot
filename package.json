@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "eslint": "^7.6.0",
-    "nodemon": "^1.18.10"
+    "nodemon": "^2.0.22"
   },
   "_moduleAliases": {
     "@helpers": "./src/helpers",
